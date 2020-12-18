@@ -1,0 +1,668 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F60B9B59258B668F00AAB167 /* SongDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F60B9B58258B668F00AAB167 /* SongDownloader.m */; };
+		F6A5ABDC257F09F60069ED91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */; };
+		F6A5ABDE257F09F60069ED91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */; };
+		F6A5ABE0257F09F60069ED91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDF257F09F60069ED91 /* ViewController.swift */; };
+		F6A5ABE3257F09F60069ED91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A5ABE1257F09F60069ED91 /* Main.storyboard */; };
+		F6A5ABE5257F09F80069ED91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6A5ABE4257F09F80069ED91 /* Assets.xcassets */; };
+		F6A5ABE8257F09F80069ED91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6A5ABE6257F09F80069ED91 /* LaunchScreen.storyboard */; };
+		F6A5ABF3257F09F80069ED91 /* XiamiCollectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABF2257F09F80069ED91 /* XiamiCollectTests.swift */; };
+		F6A5ABFE257F09F80069ED91 /* XiamiCollectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABFD257F09F80069ED91 /* XiamiCollectUITests.swift */; };
+		F6A5AC11257F0B160069ED91 /* CollectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC10257F0B160069ED91 /* CollectRequest.m */; };
+		F6A5AC24257F0D150069ED91 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC1A257F0D150069ED91 /* AFURLResponseSerialization.m */; };
+		F6A5AC25257F0D150069ED91 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC1B257F0D150069ED91 /* AFHTTPSessionManager.m */; };
+		F6A5AC26257F0D150069ED91 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC1D257F0D150069ED91 /* AFURLSessionManager.m */; };
+		F6A5AC27257F0D150069ED91 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC1E257F0D150069ED91 /* AFURLRequestSerialization.m */; };
+		F6A5AC28257F0D150069ED91 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC20257F0D150069ED91 /* AFNetworkReachabilityManager.m */; };
+		F6A5AC29257F0D150069ED91 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC21257F0D150069ED91 /* AFSecurityPolicy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F6A5ABEF257F09F80069ED91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6A5ABD0257F09F60069ED91 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6A5ABD7257F09F60069ED91;
+			remoteInfo = XiamiCollect;
+		};
+		F6A5ABFA257F09F80069ED91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F6A5ABD0257F09F60069ED91 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6A5ABD7257F09F60069ED91;
+			remoteInfo = XiamiCollect;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F60B9B57258B668F00AAB167 /* SongDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SongDownloader.h; sourceTree = "<group>"; };
+		F60B9B58258B668F00AAB167 /* SongDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongDownloader.m; sourceTree = "<group>"; };
+		F6A5ABD8257F09F60069ED91 /* XiamiCollect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XiamiCollect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F6A5ABDF257F09F60069ED91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F6A5ABE2257F09F60069ED91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F6A5ABE4257F09F80069ED91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F6A5ABE7257F09F80069ED91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F6A5ABE9257F09F80069ED91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6A5ABEE257F09F80069ED91 /* XiamiCollectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XiamiCollectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6A5ABF2257F09F80069ED91 /* XiamiCollectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XiamiCollectTests.swift; sourceTree = "<group>"; };
+		F6A5ABF4257F09F80069ED91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6A5ABF9257F09F80069ED91 /* XiamiCollectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XiamiCollectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6A5ABFD257F09F80069ED91 /* XiamiCollectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XiamiCollectUITests.swift; sourceTree = "<group>"; };
+		F6A5ABFF257F09F80069ED91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6A5AC0E257F0B160069ED91 /* XiamiCollect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XiamiCollect-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6A5AC0F257F0B160069ED91 /* CollectRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectRequest.h; sourceTree = "<group>"; };
+		F6A5AC10257F0B160069ED91 /* CollectRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectRequest.m; sourceTree = "<group>"; };
+		F6A5AC16257F0D150069ED91 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		F6A5AC17257F0D150069ED91 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		F6A5AC18257F0D150069ED91 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		F6A5AC19257F0D150069ED91 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		F6A5AC1A257F0D150069ED91 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		F6A5AC1B257F0D150069ED91 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		F6A5AC1C257F0D150069ED91 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		F6A5AC1D257F0D150069ED91 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		F6A5AC1E257F0D150069ED91 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		F6A5AC1F257F0D150069ED91 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		F6A5AC20257F0D150069ED91 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		F6A5AC21257F0D150069ED91 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		F6A5AC22257F0D150069ED91 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
+		F6A5AC23257F0D150069ED91 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F6A5ABD5257F09F60069ED91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6A5ABEB257F09F80069ED91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6A5ABF6257F09F80069ED91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F6A5ABCF257F09F60069ED91 = {
+			isa = PBXGroup;
+			children = (
+				F6A5ABDA257F09F60069ED91 /* XiamiCollect */,
+				F6A5ABF1257F09F80069ED91 /* XiamiCollectTests */,
+				F6A5ABFC257F09F80069ED91 /* XiamiCollectUITests */,
+				F6A5ABD9257F09F60069ED91 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F6A5ABD9257F09F60069ED91 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F6A5ABD8257F09F60069ED91 /* XiamiCollect.app */,
+				F6A5ABEE257F09F80069ED91 /* XiamiCollectTests.xctest */,
+				F6A5ABF9257F09F80069ED91 /* XiamiCollectUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F6A5ABDA257F09F60069ED91 /* XiamiCollect */ = {
+			isa = PBXGroup;
+			children = (
+				F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */,
+				F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */,
+				F6A5ABDF257F09F60069ED91 /* ViewController.swift */,
+				F6A5AC0F257F0B160069ED91 /* CollectRequest.h */,
+				F6A5AC10257F0B160069ED91 /* CollectRequest.m */,
+				F60B9B57258B668F00AAB167 /* SongDownloader.h */,
+				F60B9B58258B668F00AAB167 /* SongDownloader.m */,
+				F6A5AC15257F0D150069ED91 /* AFNetworking */,
+				F6A5ABE1257F09F60069ED91 /* Main.storyboard */,
+				F6A5ABE4257F09F80069ED91 /* Assets.xcassets */,
+				F6A5ABE6257F09F80069ED91 /* LaunchScreen.storyboard */,
+				F6A5ABE9257F09F80069ED91 /* Info.plist */,
+				F6A5AC0E257F0B160069ED91 /* XiamiCollect-Bridging-Header.h */,
+			);
+			path = XiamiCollect;
+			sourceTree = "<group>";
+		};
+		F6A5ABF1257F09F80069ED91 /* XiamiCollectTests */ = {
+			isa = PBXGroup;
+			children = (
+				F6A5ABF2257F09F80069ED91 /* XiamiCollectTests.swift */,
+				F6A5ABF4257F09F80069ED91 /* Info.plist */,
+			);
+			path = XiamiCollectTests;
+			sourceTree = "<group>";
+		};
+		F6A5ABFC257F09F80069ED91 /* XiamiCollectUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F6A5ABFD257F09F80069ED91 /* XiamiCollectUITests.swift */,
+				F6A5ABFF257F09F80069ED91 /* Info.plist */,
+			);
+			path = XiamiCollectUITests;
+			sourceTree = "<group>";
+		};
+		F6A5AC15257F0D150069ED91 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				F6A5AC16257F0D150069ED91 /* AFSecurityPolicy.h */,
+				F6A5AC17257F0D150069ED91 /* AFNetworkReachabilityManager.h */,
+				F6A5AC18257F0D150069ED91 /* AFURLSessionManager.h */,
+				F6A5AC19257F0D150069ED91 /* AFURLRequestSerialization.h */,
+				F6A5AC1A257F0D150069ED91 /* AFURLResponseSerialization.m */,
+				F6A5AC1B257F0D150069ED91 /* AFHTTPSessionManager.m */,
+				F6A5AC1C257F0D150069ED91 /* AFURLResponseSerialization.h */,
+				F6A5AC1D257F0D150069ED91 /* AFURLSessionManager.m */,
+				F6A5AC1E257F0D150069ED91 /* AFURLRequestSerialization.m */,
+				F6A5AC1F257F0D150069ED91 /* AFNetworking.h */,
+				F6A5AC20257F0D150069ED91 /* AFNetworkReachabilityManager.m */,
+				F6A5AC21257F0D150069ED91 /* AFSecurityPolicy.m */,
+				F6A5AC22257F0D150069ED91 /* AFCompatibilityMacros.h */,
+				F6A5AC23257F0D150069ED91 /* AFHTTPSessionManager.h */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F6A5ABD7257F09F60069ED91 /* XiamiCollect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6A5AC02257F09F80069ED91 /* Build configuration list for PBXNativeTarget "XiamiCollect" */;
+			buildPhases = (
+				F6A5ABD4257F09F60069ED91 /* Sources */,
+				F6A5ABD5257F09F60069ED91 /* Frameworks */,
+				F6A5ABD6257F09F60069ED91 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XiamiCollect;
+			productName = XiamiCollect;
+			productReference = F6A5ABD8257F09F60069ED91 /* XiamiCollect.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F6A5ABED257F09F80069ED91 /* XiamiCollectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6A5AC05257F09F80069ED91 /* Build configuration list for PBXNativeTarget "XiamiCollectTests" */;
+			buildPhases = (
+				F6A5ABEA257F09F80069ED91 /* Sources */,
+				F6A5ABEB257F09F80069ED91 /* Frameworks */,
+				F6A5ABEC257F09F80069ED91 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F6A5ABF0257F09F80069ED91 /* PBXTargetDependency */,
+			);
+			name = XiamiCollectTests;
+			productName = XiamiCollectTests;
+			productReference = F6A5ABEE257F09F80069ED91 /* XiamiCollectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F6A5ABF8257F09F80069ED91 /* XiamiCollectUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6A5AC08257F09F80069ED91 /* Build configuration list for PBXNativeTarget "XiamiCollectUITests" */;
+			buildPhases = (
+				F6A5ABF5257F09F80069ED91 /* Sources */,
+				F6A5ABF6257F09F80069ED91 /* Frameworks */,
+				F6A5ABF7257F09F80069ED91 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F6A5ABFB257F09F80069ED91 /* PBXTargetDependency */,
+			);
+			name = XiamiCollectUITests;
+			productName = XiamiCollectUITests;
+			productReference = F6A5ABF9257F09F80069ED91 /* XiamiCollectUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F6A5ABD0257F09F60069ED91 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					F6A5ABD7257F09F60069ED91 = {
+						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
+					};
+					F6A5ABED257F09F80069ED91 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = F6A5ABD7257F09F60069ED91;
+					};
+					F6A5ABF8257F09F80069ED91 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = F6A5ABD7257F09F60069ED91;
+					};
+				};
+			};
+			buildConfigurationList = F6A5ABD3257F09F60069ED91 /* Build configuration list for PBXProject "XiamiCollect" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F6A5ABCF257F09F60069ED91;
+			productRefGroup = F6A5ABD9257F09F60069ED91 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F6A5ABD7257F09F60069ED91 /* XiamiCollect */,
+				F6A5ABED257F09F80069ED91 /* XiamiCollectTests */,
+				F6A5ABF8257F09F80069ED91 /* XiamiCollectUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F6A5ABD6257F09F60069ED91 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6A5ABE8257F09F80069ED91 /* LaunchScreen.storyboard in Resources */,
+				F6A5ABE5257F09F80069ED91 /* Assets.xcassets in Resources */,
+				F6A5ABE3257F09F60069ED91 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6A5ABEC257F09F80069ED91 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6A5ABF7257F09F80069ED91 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F6A5ABD4257F09F60069ED91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6A5ABE0257F09F60069ED91 /* ViewController.swift in Sources */,
+				F6A5AC28257F0D150069ED91 /* AFNetworkReachabilityManager.m in Sources */,
+				F60B9B59258B668F00AAB167 /* SongDownloader.m in Sources */,
+				F6A5ABDC257F09F60069ED91 /* AppDelegate.swift in Sources */,
+				F6A5AC11257F0B160069ED91 /* CollectRequest.m in Sources */,
+				F6A5AC26257F0D150069ED91 /* AFURLSessionManager.m in Sources */,
+				F6A5AC25257F0D150069ED91 /* AFHTTPSessionManager.m in Sources */,
+				F6A5AC29257F0D150069ED91 /* AFSecurityPolicy.m in Sources */,
+				F6A5ABDE257F09F60069ED91 /* SceneDelegate.swift in Sources */,
+				F6A5AC24257F0D150069ED91 /* AFURLResponseSerialization.m in Sources */,
+				F6A5AC27257F0D150069ED91 /* AFURLRequestSerialization.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6A5ABEA257F09F80069ED91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6A5ABF3257F09F80069ED91 /* XiamiCollectTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6A5ABF5257F09F80069ED91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6A5ABFE257F09F80069ED91 /* XiamiCollectUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F6A5ABF0257F09F80069ED91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6A5ABD7257F09F60069ED91 /* XiamiCollect */;
+			targetProxy = F6A5ABEF257F09F80069ED91 /* PBXContainerItemProxy */;
+		};
+		F6A5ABFB257F09F80069ED91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6A5ABD7257F09F60069ED91 /* XiamiCollect */;
+			targetProxy = F6A5ABFA257F09F80069ED91 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F6A5ABE1257F09F60069ED91 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6A5ABE2257F09F60069ED91 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F6A5ABE6257F09F80069ED91 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6A5ABE7257F09F80069ED91 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F6A5AC00257F09F80069ED91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F6A5AC01257F09F80069ED91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F6A5AC03257F09F80069ED91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				INFOPLIST_FILE = XiamiCollect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XiamiCollect/XiamiCollect-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F6A5AC04257F09F80069ED91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				INFOPLIST_FILE = XiamiCollect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollect;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XiamiCollect/XiamiCollect-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F6A5AC06257F09F80069ED91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				INFOPLIST_FILE = XiamiCollectTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XiamiCollect.app/XiamiCollect";
+			};
+			name = Debug;
+		};
+		F6A5AC07257F09F80069ED91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				INFOPLIST_FILE = XiamiCollectTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XiamiCollect.app/XiamiCollect";
+			};
+			name = Release;
+		};
+		F6A5AC09257F09F80069ED91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				INFOPLIST_FILE = XiamiCollectUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollectUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = XiamiCollect;
+			};
+			name = Debug;
+		};
+		F6A5AC0A257F09F80069ED91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				INFOPLIST_FILE = XiamiCollectUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollectUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = XiamiCollect;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F6A5ABD3257F09F60069ED91 /* Build configuration list for PBXProject "XiamiCollect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6A5AC00257F09F80069ED91 /* Debug */,
+				F6A5AC01257F09F80069ED91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6A5AC02257F09F80069ED91 /* Build configuration list for PBXNativeTarget "XiamiCollect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6A5AC03257F09F80069ED91 /* Debug */,
+				F6A5AC04257F09F80069ED91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6A5AC05257F09F80069ED91 /* Build configuration list for PBXNativeTarget "XiamiCollectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6A5AC06257F09F80069ED91 /* Debug */,
+				F6A5AC07257F09F80069ED91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6A5AC08257F09F80069ED91 /* Build configuration list for PBXNativeTarget "XiamiCollectUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6A5AC09257F09F80069ED91 /* Debug */,
+				F6A5AC0A257F09F80069ED91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F6A5ABD0257F09F60069ED91 /* Project object */;
+}
