@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        collectReq.request(withCollectURL:"https://music.xiami.com/resource/collect/v2/detail/2365987/42477498/1483791850?auth_key=1608282974-0-0-593d96b177a71b5f58cf45346e6cbb97" , key:"1608278818-0-0-ec7b27f553147a2465a43d80c9846430") {[weak self] (responseString) in
+        collectReq.request(withCollectURL:"https://music.xiami.com/resource/collect/v2/detail/266209311/362003889/1514974770?auth_key=1608807127-0-0-3bec7515f29053cc2956165dccb1e272" , key:"1608278818-0-0-ec7b27f553147a2465a43d80c9846430") {[weak self] (responseString) in
             
             let data = responseString.data(using: .utf8)
             let JSON = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
