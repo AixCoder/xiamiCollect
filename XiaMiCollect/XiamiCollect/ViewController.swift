@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        collectReq.request(withCollectURL:"https://music.xiami.com/resource/collect/v2/detail/2365987/42477498/1483791850?auth_key=1608282974-0-0-593d96b177a71b5f58cf45346e6cbb97" , key:"1608278818-0-0-ec7b27f553147a2465a43d80c9846430") {[weak self] (responseString) in
+        collectReq.request(withCollectURL:"https://music.xiami.com/resource/collect/v2/detail/5123283/41212267/1519806069?auth_key=1608300521-0-0-00f5a403ff483aa40156a72a88ac2e15" , key:"1608278818-0-0-ec7b27f553147a2465a43d80c9846430") {[weak self] (responseString) in
             
             let data = responseString.data(using: .utf8)
             let JSON = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
@@ -58,6 +58,16 @@ class ViewController: UIViewController {
             return
         }
         
+        //download collect logo
+        let collectLogo = resultObj["collectLogoLarge"] as! String
+        albumDownloader.downloadAlbum(withURL: collectLogo, localPath: downloadPath, albumName: "collectLogoLarge.webp") {
+            
+        } failure: { (error) in
+            print("下载歌单封面失败")
+        }
+
+        
+        
         let songsList = resultObj["songs"] as! Array<Dictionary <String , Any>>
         startDownloadSong(songsList,
                           downloadQueueNum: 0,
@@ -97,6 +107,9 @@ class ViewController: UIViewController {
             }
         }
         
+        //download collect logo
+        
+        
         if !songName.isEmpty && !fileURL.isEmpty {
             //download mp3 file
             let mp3FileName = songName + "." + fileFormat
@@ -109,8 +122,7 @@ class ViewController: UIViewController {
             //download album logo
             let albumID = songObj["albumId"] as! Int
             let album_webp = songObj["albumLogoS"] as! String
-            let songID = songObj["songId"] as! Int
-            let albumFileName = String(albumID) + "_"  + String(songID) + ".webp"
+            let albumFileName = "album_" + String(albumID) + ".webp"
             self.albumDownloader.downloadAlbum(withURL: album_webp, localPath: downloadPath, albumName: albumFileName) {
                 
             } failure: { (error) in
