@@ -22,7 +22,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AlbumLogoDownloader : NSObject
 
-- (void)downloadAlbumWithURL:(NSString *)picURL localPath:(NSString *)localPath albumName:(NSString *)albumName success:(void (^)(void))completion failure:(void (^)(NSError *error))downloadFailed;
+- (void)downloadAlbumWithURL:(NSString *)picURL
+                   localPath:(NSString *)localPath
+                   albumName:(NSString *)albumName
+                     success:(void (^)(void))completion
+                     failure:(void (^)(NSError *error))downloadFailed;
+
+@end
+
+@interface PicDownloader : NSObject
+
+- (void)downloadWithURL:(NSString *)picURL
+                   localPath:(NSString *)localPath
+                   picName:(NSString *)picName
+                     success:(void (^)(void))completion
+                     failure:(void (^)(NSError *error))downloadFailed;
 
 @end
 

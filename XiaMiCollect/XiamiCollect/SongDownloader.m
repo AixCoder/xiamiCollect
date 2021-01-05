@@ -52,7 +52,11 @@
 
 @implementation AlbumLogoDownloader
 
-- (void)downloadAlbumWithURL:(NSString *)picURL localPath:(NSString *)localPath albumName:(NSString *)albumName success:(void (^)(void))completion failure:(void (^)(NSError * _Nonnull))downloadFailed
+- (void)downloadAlbumWithURL:(NSString *)picURL
+                   localPath:(NSString *)localPath
+                   albumName:(NSString *)albumName
+                     success:(void (^)(void))completion
+                     failure:(void (^)(NSError * _Nonnull))downloadFailed
 {
     
     AFHTTPSessionManager *httpManager = [AFHTTPSessionManager manager];
@@ -63,9 +67,61 @@
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         
         //下载到----本地路径
+        NSString *sugName = response.suggestedFilename;
+        NSLog(@"%@",sugName);
+        
         NSString *albumPath = [localPath stringByAppendingPathComponent:albumName];
         
         return [NSURL fileURLWithPath:albumPath];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+        if (!error && filePath) {
+            if (completion) {
+                completion();
+            }
+        }else{
+            downloadFailed(error);
+        }
+    }];
+    [task resume];
+}
+
+@end
+
+@implementation PicDownloader
+
+- (void)downloadWithURL:(NSString *)picURL
+              localPath:(NSString *)localPath
+                picName:(NSString *)picName
+                success:(void (^)(void))completion
+                failure:(void (^)(NSError * _Nonnull))downloadFailed
+{
+    
+    AFHTTPSessionManager *httpManager = [AFHTTPSessionManager manager];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:picURL]];
+    NSURLSessionDownloadTask *task = [httpManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //下载到----本地路径
+//        NSString *sugName = response.suggestedFilename;
+        NSString *type = @"";
+        if ([response.MIMEType isEqualToString:@"image/webp"]) {
+            type = @"webp";
+        }else if ([response.MIMEType isEqualToString:@"image/png"]){
+            type = @"png";
+        }else if ([response.MIMEType isEqualToString:@"image/jpeg"]){
+            type = @"jpeg";
+        }else{
+            return [NSURL URLWithString:@""];
+        }
+        
+        NSString *fullPicName = [NSString stringWithFormat:@"%@.%@",picName,type];
+        NSString *picPath = [localPath stringByAppendingPathComponent:fullPicName];
+        
+        return [NSURL fileURLWithPath:picPath];
         
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         
