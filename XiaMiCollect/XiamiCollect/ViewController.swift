@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
     
     var downloadIndex = 0
-    let collectURLS = ["https://music.xiami.com/resource/collect/v2/detail/36244617/841057771/1556869819?auth_key=1609922787-0-0-8f011869d9973cb5e1fcd0549c305731",
+    let collectURLS = ["https://music.xiami.com/resource/collect/v2/detail/1059958/3105065/1467078216?auth_key=1609999835-0-0-38723b29ae8ffaa9aaf958ddbbc629de",
     "https://music.xiami.com/resource/collect/v2/detail/2365987/100851462/1609823525?auth_key=1609916765-0-0-11f054714535845bb59bb2e9cedbc6a8",
     "https://music.xiami.com/resource/collect/v2/detail/2365987/42477498/1483791850?auth_key=1609916788-0-0-8d31a8c8583971bfad00b6e4f015eff0"]
     
@@ -28,8 +28,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let url = collectURLS[downloadIndex]
+        let url = "https://music.xiami.com/resource/collect/v2/detail/466252/25016567/1399116824?auth_key=1610000721-0-0-6fc15ee4af38151c374ee99251e9ee17"
         prepareToDownloadCollect(url)
+        
+        
     }
     
     private func prepareToDownloadCollect(_ collectUrl: String) {
@@ -86,7 +88,9 @@ class ViewController: UIViewController {
                 
                 //play list id
                 let playlisID = responseObj["listId"] as! Int
-                result["xiamiListID"] = playlisID
+                result["playListID"] = playlisID
+                
+                result["playlistFrom"] = "xiami"
                 
                 //collect cover
                 let collectLogoL = responseObj["collectLogoLarge"] as! String
