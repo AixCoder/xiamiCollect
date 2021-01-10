@@ -67,8 +67,6 @@
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
         
         //下载到----本地路径
-        NSString *sugName = response.suggestedFilename;
-        NSLog(@"%@",sugName);
         
         NSString *albumPath = [localPath stringByAppendingPathComponent:albumName];
         

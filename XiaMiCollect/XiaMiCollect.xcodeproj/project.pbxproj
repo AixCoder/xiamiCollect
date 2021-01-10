@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F60B9B59258B668F00AAB167 /* SongDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F60B9B58258B668F00AAB167 /* SongDownloader.m */; };
+		F670C61325A549720068CA33 /* collectResult.json in Resources */ = {isa = PBXBuildFile; fileRef = F670C61225A549710068CA33 /* collectResult.json */; };
 		F6A5ABDC257F09F60069ED91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */; };
 		F6A5ABDE257F09F60069ED91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */; };
 		F6A5ABE0257F09F60069ED91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDF257F09F60069ED91 /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		F60B9B57258B668F00AAB167 /* SongDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SongDownloader.h; sourceTree = "<group>"; };
 		F60B9B58258B668F00AAB167 /* SongDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongDownloader.m; sourceTree = "<group>"; };
+		F670C61225A549710068CA33 /* collectResult.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collectResult.json; sourceTree = "<group>"; };
 		F6A5ABD8257F09F60069ED91 /* XiamiCollect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XiamiCollect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */,
 				F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */,
 				F6A5ABDF257F09F60069ED91 /* ViewController.swift */,
+				F670C61225A549710068CA33 /* collectResult.json */,
 				F6A5AC0F257F0B160069ED91 /* CollectRequest.h */,
 				F6A5AC10257F0B160069ED91 /* CollectRequest.m */,
 				F60B9B57258B668F00AAB167 /* SongDownloader.h */,
@@ -289,6 +292,7 @@
 				F6A5ABE8257F09F80069ED91 /* LaunchScreen.storyboard in Resources */,
 				F6A5ABE5257F09F80069ED91 /* Assets.xcassets in Resources */,
 				F6A5ABE3257F09F60069ED91 /* Main.storyboard in Resources */,
+				F670C61325A549720068CA33 /* collectResult.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

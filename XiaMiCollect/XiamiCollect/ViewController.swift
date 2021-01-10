@@ -17,10 +17,26 @@ class ViewController: UIViewController {
     let logoMDownloader = PicDownloader.init()
     let logoLDownloader = PicDownloader.init()
     
+    
+    var downloadIndex = 0
+    let collectURLS = ["https://music.xiami.com/resource/collect/v2/detail/1059958/3105065/1467078216?auth_key=1609999835-0-0-38723b29ae8ffaa9aaf958ddbbc629de",
+    "https://music.xiami.com/resource/collect/v2/detail/2365987/100851462/1609823525?auth_key=1609916765-0-0-11f054714535845bb59bb2e9cedbc6a8",
+    "https://music.xiami.com/resource/collect/v2/detail/2365987/42477498/1483791850?auth_key=1609916788-0-0-8d31a8c8583971bfad00b6e4f015eff0"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        collectReq.request(withCollectURL:"https://music.xiami.com/resource/collect/v2/detail/36244617/841057771/1556869819?auth_key=1609840882-0-0-43796324d49d0173d0072ec26bb01c83",
+        
+        let url = "https://music.xiami.com/resource/collect/v2/detail/466252/25016567/1399116824?auth_key=1610000721-0-0-6fc15ee4af38151c374ee99251e9ee17"
+        prepareToDownloadCollect(url)
+        
+        
+    }
+    
+    private func prepareToDownloadCollect(_ collectUrl: String) {
+        
+        collectReq.request(withCollectURL: collectUrl,
                            key:"") {[weak self] (responseString) in
             
             let data = responseString.data(using: .utf8)
@@ -30,7 +46,6 @@ class ViewController: UIViewController {
         } failure: { (error) in
             
         }
-
     }
 
     func downloadCollect(_ JSON: Dictionary<String, Any>)  {
@@ -42,6 +57,83 @@ class ViewController: UIViewController {
         
         //设置options为JSONSerialization.WritingOptions.prettyPrinted，则打印格式更好阅读
         let data: NSData = try! JSONSerialization.data(withJSONObject: JSON, options: .prettyPrinted) as NSData
+        
+        let path = Bundle.main.path(forResource: "collectResult", ofType: "json")
+        
+        var xiamiCollect: Dictionary<String, Any> = [:]
+        
+        let url = URL(fileURLWithPath: path!)
+        
+            do {
+                      /*
+                         * try 发生异常会跳到catch代码中
+                         * try! 发生异常程序会直接crash
+                         */
+                    let data = try Data(contentsOf: url)
+                    let jsonData:Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                var collectResult = jsonData as! Dictionary<String, Any>
+                
+                let responseObj = JSON["resultObj"] as! Dictionary<String, Any>
+                let name = responseObj["collectName"] as! String
+                
+                //collect name
+                var result = collectResult["resultObj"] as! Dictionary<String, Any>
+                result["collectName"] = name
+                
+                let desc = responseObj["cleanDesc"] as! String
+                result["description"] = desc
+                
+                let tagArr = responseObj["tags"] as! Array<String>
+                result["tags"] = tagArr
+                
+                //play list id
+                let playlisID = responseObj["listId"] as! Int
+                result["playListID"] = playlisID
+                
+                result["playlistFrom"] = "xiami"
+                
+                //collect cover
+                let collectLogoL = responseObj["collectLogoLarge"] as! String
+                result["collectLogoM"] = responseObj["collectLogoMiddle"] as! String
+                result["collectLogoL"] = collectLogoL
+                
+                let songs = responseObj["songs"] as! Array<Dictionary<String, Any>>
+                var tracks: Array<Dictionary<String, Any>> = []
+                for song in songs {
+                    //track info
+                    var track: Dictionary<String, Any> = [:]
+                    track["enablePlay"] = true
+                    track["whoAlsoLike"] = []
+                    //song name
+                    let name = song["songName"] as! String
+                    track["trackName"] = name
+                    //artist
+                    let artists = song["artistName"] as! String
+                    track["artistName"] = artists
+                    //albumId
+                    let album_id = song["albumId"] as! Int
+                    track["albumID"] = album_id
+                    //track id
+                    let track_id = song["songId"] as! Int
+                    track["trackID"] = track_id
+                    //track logo
+                    let logourl = song["albumLogoS"] as! String
+                    track["albumLogoS"] = logourl
+                    //track des
+                    let des = song["description"] as! String
+                    track["trackDes"] = des
+                    tracks.append(track)
+                    
+                }
+                result["trackObjs"] = tracks
+                
+                collectResult["resultObj"] = result
+                xiamiCollect = collectResult
+             
+            } catch  {
+                print("error reading json file")
+            }
+
         
         //creat folder for collectID
         let resultObj = JSON["resultObj"] as! Dictionary<String, Any>
@@ -58,6 +150,12 @@ class ViewController: UIViewController {
             try? FileManager.default.createDirectory(atPath: downloadPath, withIntermediateDirectories: true, attributes: nil)
         }
         let success = data.write(toFile: jsonFilePath, atomically:false)
+        
+        
+        let collectJsonPath = downloadPath + "/collectResult_" + String(collectID) + ".json"
+        let collectData: NSData = try! JSONSerialization.data(withJSONObject: xiamiCollect, options: .prettyPrinted) as NSData
+        collectData.write(toFile: collectJsonPath, atomically: false)
+
         if success == false {
             print("创建下载目录失败")
             return
@@ -70,19 +168,21 @@ class ViewController: UIViewController {
             try? FileManager.default.createDirectory(atPath: logoDownloadPath, withIntermediateDirectories: true, attributes: nil)
         }
         
+        
         var logoM = resultObj["collectLogoMiddle"] as? String
         logoM = logoM ?? ""
         if logoM?.isEmpty == false {
             
-            logoMDownloader.download(withURL: logoM!, localPath: logoDownloadPath, picName: "collectLogoM") {
+            let logoName = "collectLogoM" + "_" + String(collectID)
+            logoMDownloader.download(withURL: logoM!,
+                                     localPath: logoDownloadPath,
+                                     picName: logoName) {
                 
             } failure: { (error) in
                 print("下载歌单封面失败")
             }
         }
         
-        
-
 
         
         //download music
@@ -95,10 +195,6 @@ class ViewController: UIViewController {
     
     func startDownloadSong(_ songsList: Array<Dictionary <String, Any>>, downloadQueueNum: Int, downloadPath: String) {
         //
-        if downloadQueueNum >= songsList.count {
-            print("all the songs have been downloaded")
-            return;
-        }
         
         let songObj = songsList[downloadQueueNum]
         let songName = songObj["songName"] as! String
@@ -129,8 +225,16 @@ class ViewController: UIViewController {
             //download mp3 file
             let mp3FileName = songName + "." + fileFormat
             downloadMP3File(fileURL, downloadPath, mp3FileName) {[weak self] in
-                let queueNum = downloadQueueNum + 1
-                self?.startDownloadSong(songsList, downloadQueueNum: queueNum, downloadPath: downloadPath)
+                let nextQueueNum = downloadQueueNum + 1
+                
+                if nextQueueNum >= songsList.count {
+                    print("all the songs have been downloaded")
+                    return;
+                    
+                }else{
+                    self?.startDownloadSong(songsList, downloadQueueNum: nextQueueNum, downloadPath: downloadPath)
+                    
+                }
             }
             
             
@@ -173,5 +277,7 @@ class ViewController: UIViewController {
         }
     }
 
+    
+    
 }
 
