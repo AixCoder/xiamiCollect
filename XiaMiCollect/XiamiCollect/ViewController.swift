@@ -16,7 +16,10 @@ class ViewController: UIViewController {
     
     let logoMDownloader = PicDownloader.init()
     let logoLDownloader = PicDownloader.init()
+    let artistImgDownloader = PicDownloader.init()
     
+    let matchButton = UIButton(type: .custom)
+    let match = PlaylistMatch()
     
     var downloadIndex = 0
     let collectURLS = ["https://music.xiami.com/resource/collect/v2/detail/1059958/3105065/1467078216?auth_key=1609999835-0-0-38723b29ae8ffaa9aaf958ddbbc629de",
@@ -28,9 +31,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let url = "https://music.xiami.com/resource/collect/v2/detail/466252/25016567/1399116824?auth_key=1610000721-0-0-6fc15ee4af38151c374ee99251e9ee17"
-        prepareToDownloadCollect(url)
+        matchButton.setTitle("Playlist match", for: .normal)
+        matchButton.frame = CGRect.init(x: 20,
+                                        y: 60,
+                                        width: 100,
+                                        height: 40)
+        matchButton.addTarget(self, action: #selector(matchButtonTapped), for: .touchUpInside)
+        view.addSubview(matchButton)
         
+        
+        let url = "https://music.xiami.com/resource/collect/v2/detail/44608391/38273780/1418203451?auth_key=1610435640-0-0-1102cbb718584de4314887ec2b4b47f2"
+        prepareToDownloadCollect(url)
         
     }
     
@@ -89,7 +100,6 @@ class ViewController: UIViewController {
                 //play list id
                 let playlisID = responseObj["listId"] as! Int
                 result["playListID"] = playlisID
-                
                 result["playlistFrom"] = "xiami"
                 
                 //collect cover
@@ -110,6 +120,9 @@ class ViewController: UIViewController {
                     //artist
                     let artists = song["artistName"] as! String
                     track["artistName"] = artists
+                    //artist logo
+                    let artistLogo = song["artistLogo"] as! String
+                    track["artistLogo"] = artistLogo
                     //albumId
                     let album_id = song["albumId"] as! Int
                     track["albumID"] = album_id
@@ -142,7 +155,7 @@ class ViewController: UIViewController {
         
         let jsonFileName = String(collectID) + ".json"
         
-        let downloadPath = "/Users/liuhongnian/Desktop/" + String(collectName)
+        let downloadPath = "/Users/liuhongnian/Desktop/待处理歌单/" + String(collectName)
         let jsonFilePath = downloadPath + "/" + jsonFileName
                 
         let isExists = FileManager.default.fileExists(atPath: downloadPath, isDirectory: nil)
@@ -224,6 +237,8 @@ class ViewController: UIViewController {
         if !songName.isEmpty && !fileURL.isEmpty {
             //download mp3 file
             let mp3FileName = songName + "." + fileFormat
+            
+            print("downloading the %d song at playlist", downloadQueueNum + 1)
             downloadMP3File(fileURL, downloadPath, mp3FileName) {[weak self] in
                 let nextQueueNum = downloadQueueNum + 1
                 
@@ -255,6 +270,24 @@ class ViewController: UIViewController {
             } failure: { (error) in
                 print("下载专辑封面----失败")
             }
+            
+            //download artist logo
+            let artistLogoDownloadPath = downloadPath + "/image" + "/artistlogo"
+            if !FileManager.default.fileExists(atPath: artistLogoDownloadPath) {
+                try? FileManager.default.createDirectory(atPath: artistLogoDownloadPath, withIntermediateDirectories: true, attributes: nil)
+            }
+            
+            let artistid = songObj["artistId"] as! Int
+            let artistPicName = "artistlogo_" + String(artistid)
+            let artistlogoURL = songObj["artistLogo"] as! String
+            self.artistImgDownloader.download(withURL: artistlogoURL,
+                                              localPath: artistLogoDownloadPath,
+                                              picName: artistPicName) {
+                
+            } failure: { (error) in
+                print("download artis logo failed")
+            }
+
 
         }
     }
@@ -278,6 +311,9 @@ class ViewController: UIViewController {
     }
 
     
-    
+    @objc func matchButtonTapped() {
+        
+        match.start()
+    }
 }
 

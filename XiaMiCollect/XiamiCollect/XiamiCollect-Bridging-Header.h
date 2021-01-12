@@ -5,3 +5,5 @@
 #import "CollectRequest.h"
 #import "SongDownloader.h"
 
+#import "PlaylistMatch.h"
+
