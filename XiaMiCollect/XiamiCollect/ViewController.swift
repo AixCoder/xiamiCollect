@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let url = "https://music.xiami.com/resource/collect/v2/detail/466252/25016567/1399116824?auth_key=1610000721-0-0-6fc15ee4af38151c374ee99251e9ee17"
+        let url = "https://music.xiami.com/resource/collect/v2/detail/4100367/5054039/1609860192?auth_key=1610272891-0-0-2c4c756571c95ef601710942a57304ba"
         prepareToDownloadCollect(url)
         
         
