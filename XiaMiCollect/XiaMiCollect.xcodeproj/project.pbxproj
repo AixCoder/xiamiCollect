@@ -24,6 +24,7 @@
 		F6A5AC27257F0D150069ED91 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC1E257F0D150069ED91 /* AFURLRequestSerialization.m */; };
 		F6A5AC28257F0D150069ED91 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC20257F0D150069ED91 /* AFNetworkReachabilityManager.m */; };
 		F6A5AC29257F0D150069ED91 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC21257F0D150069ED91 /* AFSecurityPolicy.m */; };
+		F6EB8CB725AD99E40039029E /* PlaylistMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EB8CB625AD99E40039029E /* PlaylistMatch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		F6A5AC21257F0D150069ED91 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		F6A5AC22257F0D150069ED91 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		F6A5AC23257F0D150069ED91 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		F6EB8CB525AD99E40039029E /* PlaylistMatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaylistMatch.h; sourceTree = "<group>"; };
+		F6EB8CB625AD99E40039029E /* PlaylistMatch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaylistMatch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */,
 				F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */,
 				F6A5ABDF257F09F60069ED91 /* ViewController.swift */,
+				F6EB8CB525AD99E40039029E /* PlaylistMatch.h */,
+				F6EB8CB625AD99E40039029E /* PlaylistMatch.m */,
 				F670C61225A549710068CA33 /* collectResult.json */,
 				F6A5AC0F257F0B160069ED91 /* CollectRequest.h */,
 				F6A5AC10257F0B160069ED91 /* CollectRequest.m */,
@@ -326,6 +331,7 @@
 				F6A5AC25257F0D150069ED91 /* AFHTTPSessionManager.m in Sources */,
 				F6A5AC29257F0D150069ED91 /* AFSecurityPolicy.m in Sources */,
 				F6A5ABDE257F09F60069ED91 /* SceneDelegate.swift in Sources */,
+				F6EB8CB725AD99E40039029E /* PlaylistMatch.m in Sources */,
 				F6A5AC24257F0D150069ED91 /* AFURLResponseSerialization.m in Sources */,
 				F6A5AC27257F0D150069ED91 /* AFURLRequestSerialization.m in Sources */,
 			);
