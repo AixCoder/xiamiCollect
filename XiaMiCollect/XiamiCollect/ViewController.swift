@@ -36,11 +36,12 @@ class ViewController: UIViewController {
                                         y: 60,
                                         width: 100,
                                         height: 40)
+        matchButton.setTitleColor(UIColor.blue, for: .normal)
         matchButton.addTarget(self, action: #selector(matchButtonTapped), for: .touchUpInside)
         view.addSubview(matchButton)
         
         
-        let url = "https://music.xiami.com/resource/collect/v2/detail/44608391/38273780/1418203451?auth_key=1610435640-0-0-1102cbb718584de4314887ec2b4b47f2"
+        let url = "https://music.xiami.com/resource/collect/v2/detail/4458644/10842226/1483534369?auth_key=1610595680-0-0-fe226df3f294bec8a822dee652958c1d"
         prepareToDownloadCollect(url)
         
     }

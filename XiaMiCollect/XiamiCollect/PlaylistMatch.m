@@ -104,12 +104,7 @@
                                                                      error:NULL];
                             NSAssert(copySuccess, @"");
                             
-                            //copy image
-                            NSString *collectImagesPath = [playListPath stringByAppendingPathComponent:@"image"];
-                            NSString *goodImgsPath = [goodPath stringByAppendingPathComponent:@"image"];
-                            copySuccess = [fileManager copyItemAtPath:collectImagesPath toPath:goodImgsPath error:NULL];
-                            NSAssert(copySuccess, @"");
-                            
+ 
                             NSString *xiamiRootPath = @"/Users/liuhongnian/Desktop/虾米的回忆";
                             NSString *moveToPath = [xiamiRootPath stringByAppendingPathComponent:collectName];
                                                             
