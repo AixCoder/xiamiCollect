@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         view.addSubview(matchButton)
         
         
-        let url = "https://music.xiami.com/resource/collect/v2/detail/4458644/10842226/1483534369?auth_key=1610595680-0-0-fe226df3f294bec8a822dee652958c1d"
+        let url = "https://music.xiami.com/resource/collect/v2/detail/8630958/841017251/1559351156?auth_key=1610960510-0-0-1059d91065a8f24d640706af495d3eca"
         prepareToDownloadCollect(url)
         
     }
