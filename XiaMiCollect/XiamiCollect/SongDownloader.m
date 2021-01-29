@@ -113,6 +113,7 @@
         }else if ([response.MIMEType isEqualToString:@"image/jpeg"]){
             type = @"jpeg";
         }else{
+            NSAssert(false, @"下载图片格式---不支持");
             return [NSURL URLWithString:@""];
         }
         
