@@ -19,8 +19,7 @@
 - (void)start
 {
     
-    NSURLRequest *playListReq = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://autumnfish.cn/user/playlist?uid=40261911&limit=11"]];
-    
+    NSURLRequest *playListReq = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://autumnfish.cn/user/playlist?uid=40261911&limit=2"]];
     
     _dataTask = [[AFHTTPSessionManager manager] dataTaskWithRequest:playListReq
                                                      uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
@@ -104,11 +103,26 @@
                                                                      error:NULL];
                             NSAssert(copySuccess, @"");
                             
-                            //copy image
-                            NSString *collectImagesPath = [playListPath stringByAppendingPathComponent:@"image"];
-                            NSString *goodImgsPath = [goodPath stringByAppendingPathComponent:@"image"];
-                            copySuccess = [fileManager copyItemAtPath:collectImagesPath toPath:goodImgsPath error:NULL];
-                            NSAssert(copySuccess, @"");
+                            //copy collect cover
+                            NSString *goodCollectCoverPath = [goodPath stringByAppendingPathComponent:@"/image/collectCover"];
+                            [fileManager createDirectoryAtPath:goodCollectCoverPath withIntermediateDirectories:YES attributes:nil error:NULL];
+                            
+                            NSString *collectCoverPath = [playListPath stringByAppendingPathComponent:@"/image/collectCover"];
+                            
+                            NSString *coverMName;
+                            for (NSString *subCoverName in [fileManager contentsOfDirectoryAtPath:collectCoverPath
+                                                                                            error:NULL])
+                            {
+                                if ([subCoverName hasPrefix:@"collectLogoM"]) {
+                                    coverMName = subCoverName;
+                                }
+                            }
+                            NSString *goodFullCoverPath = [goodCollectCoverPath stringByAppendingPathComponent:coverMName];
+                            NSString *collectMFilePath = [collectCoverPath stringByAppendingPathComponent:coverMName];
+                            BOOL copyCoverSuccess =  [fileManager copyItemAtPath:collectMFilePath toPath:goodFullCoverPath error:NULL];
+                            
+                            NSAssert(copyCoverSuccess, @"");
+                            
                             
                             NSString *xiamiRootPath = @"/Users/liuhongnian/Desktop/虾米的回忆";
                             NSString *moveToPath = [xiamiRootPath stringByAppendingPathComponent:collectName];
@@ -126,7 +140,6 @@
                             NSLog(@"歌单id 匹配后,存入json文件失败");
                         }
                     }
-                    
                     
                     
                     
