@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     
     @objc func injected() {
         //
-//        downloadCollectTapped()
+        downloadCollectTapped()
     }
     
     override func viewDidLoad() {
@@ -358,7 +358,7 @@ class ViewController: UIViewController {
     
     @objc func downloadCollectTapped() {
         //
-        let url = "https://music.xiami.com/resource/collect/v2/detail/41258960/778611688/1553146992?auth_key=1611904136-0-0-59727df363dfefb35f4085bf997054ff"
+        let url = "https://music.xiami.com/resource/collect/v2/detail/13529947/1264191996/1602742431?auth_key=1612015950-0-0-e46b34ad61d496b16badbb4858cb84b2"
         prepareToDownloadCollect(url)
     }
 }
