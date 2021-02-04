@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     let artistImgDownloader = PicDownloader.init()
     
     let matchButton = UIButton(type: .custom)
+    let genresButton = UIButton(type: .custom)
     let match = PlaylistMatch()
     
     let downloadButton = UIButton(type: .custom)
@@ -53,6 +54,13 @@ class ViewController: UIViewController {
         downloadButton.setTitleColor(UIColor.blue, for: .normal)
         downloadButton.addTarget(self, action: #selector(downloadCollectTapped), for: .touchUpInside)
         view.addSubview(downloadButton)
+        
+        
+        genresButton.frame = CGRect.init(x: 200, y: 130, width: 100, height: 40)
+        genresButton.setTitle("获取所有流派", for: .normal)
+        genresButton.addTarget(self, action: #selector(genresButtonTapped), for: .touchUpInside)
+        genresButton.setTitleColor(.blue, for: .normal)
+        view.addSubview(genresButton)
         
     
     }
@@ -354,6 +362,11 @@ class ViewController: UIViewController {
     @objc func matchButtonTapped() {
         
         match.start()
+    }
+    
+    @objc func genresButtonTapped() {
+        
+        
     }
     
     @objc func downloadCollectTapped() {
