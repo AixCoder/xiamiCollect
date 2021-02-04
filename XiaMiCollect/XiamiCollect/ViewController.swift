@@ -20,10 +20,10 @@ class ViewController: UIViewController {
     let artistImgDownloader = PicDownloader.init()
     
     let matchButton = UIButton(type: .custom)
-    let genresButton = UIButton(type: .custom)
     let match = PlaylistMatch()
     
     let downloadButton = UIButton(type: .custom)
+    let genresButton = UIButton(type: .custom)
     
     var downloadIndex = 0
     let collectURLS = ["https://music.xiami.com/resource/collect/v2/detail/1059958/3105065/1467078216?auth_key=1609999835-0-0-38723b29ae8ffaa9aaf958ddbbc629de",
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     
     @objc func injected() {
         //
-        downloadCollectTapped()
+//        downloadCollectTapped()
     }
     
     override func viewDidLoad() {
@@ -45,6 +45,7 @@ class ViewController: UIViewController {
                                         y: 60,
                                         width: 100,
                                         height: 40)
+        
         matchButton.setTitleColor(UIColor.blue, for: .normal)
         matchButton.addTarget(self, action: #selector(matchButtonTapped), for: .touchUpInside)
         view.addSubview(matchButton)
@@ -56,12 +57,11 @@ class ViewController: UIViewController {
         view.addSubview(downloadButton)
         
         
-        genresButton.frame = CGRect.init(x: 200, y: 130, width: 100, height: 40)
-        genresButton.setTitle("获取所有流派", for: .normal)
-        genresButton.addTarget(self, action: #selector(genresButtonTapped), for: .touchUpInside)
+        genresButton.setTitle("Genres", for: .normal)
         genresButton.setTitleColor(.blue, for: .normal)
+        genresButton.frame = CGRect.init(x: 200, y: 160, width: 100, height: 40)
+        genresButton.addTarget(self, action: #selector(genresButtonTapped), for: .touchUpInside)
         view.addSubview(genresButton)
-        
     
     }
     
@@ -196,7 +196,6 @@ class ViewController: UIViewController {
         }
         
         
-        
         //2. save collect result json
         let collectJsonPath = downloadPath + "/collectResult_" + String(collectID) + ".json"
         let collectData: NSData = try! JSONSerialization.data(withJSONObject: xiamiCollect, options: .prettyPrinted) as NSData
@@ -291,7 +290,7 @@ class ViewController: UIViewController {
                 }
             }
             
-            
+            //
             //download albumS logo
             let albumID = songObj["albumId"] as! Int
             let albumS_webp = songObj["albumLogoS"] as! String
@@ -304,12 +303,22 @@ class ViewController: UIViewController {
                 try? FileManager.default.createDirectory(atPath: albumDownloadPath, withIntermediateDirectories: true, attributes: nil)
             }
                         
-            print("downloading the %d album at playlist", downloadQueueNum + 1)
-            self.albumSDownloader.downloadAlbum(withURL: albumS_webp, localPath: albumDownloadPath, albumName: albumFileName)
-            {
+//            print("downloading the %d album at playlist", downloadQueueNum + 1)
+            self.albumSDownloader.downloadAlbum(withURL: albumS_webp, localPath: albumDownloadPath, albumName: albumFileName){
+                                                 
+//                let nextQueueNum = downloadQueueNum + 1
+//                if nextQueueNum >= songsList.count {
+//                    print("download is complete")}
+//                else{
+//                    self?.startDownloadSong(songsList, downloadQueueNum: nextQueueNum, downloadPath: downloadPath)
+//                }
                 
-            } failure: {(error) in
+            } failure: { (error) in
+                
                 print("下载专辑封面----失败")
+//                let nextQueueNum = downloadQueueNum + 1
+//                self?.startDownloadSong(songsList, downloadQueueNum: nextQueueNum, downloadPath: downloadPath)
+
             }
             
             
@@ -364,15 +373,22 @@ class ViewController: UIViewController {
         match.start()
     }
     
-    @objc func genresButtonTapped() {
+    @objc func downloadCollectTapped() {
         
+        let url = "https://music.xiami.com/resource/collect/v2/detail/466252/811942/1483789830?auth_key=1612354213-0-0-80654c0e12bed208bbe20b3df72e2b62"
+        
+        prepareToDownloadCollect(url)
         
     }
     
-    @objc func downloadCollectTapped() {
-        //
-        let url = "https://music.xiami.com/resource/collect/v2/detail/13529947/1264191996/1602742431?auth_key=1612015950-0-0-e46b34ad61d496b16badbb4858cb84b2"
-        prepareToDownloadCollect(url)
+    @objc func genresButtonTapped() {
+        
+        let genresVC = GenresWebController.init()
+
+        let navController = UINavigationController.init(rootViewController: genresVC)
+
+        self.present(navController, animated: true) {}
+        
     }
 }
 

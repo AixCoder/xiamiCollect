@@ -24,6 +24,10 @@
 		F6A5AC27257F0D150069ED91 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC1E257F0D150069ED91 /* AFURLRequestSerialization.m */; };
 		F6A5AC28257F0D150069ED91 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC20257F0D150069ED91 /* AFNetworkReachabilityManager.m */; };
 		F6A5AC29257F0D150069ED91 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A5AC21257F0D150069ED91 /* AFSecurityPolicy.m */; };
+		F6D533A125CB8A3900ABB513 /* GenresWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D5339F25CB8A3900ABB513 /* GenresWebController.m */; };
+		F6D533A225CB8A3900ABB513 /* GenresWebController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D533A025CB8A3900ABB513 /* GenresWebController.xib */; };
+		F6D5340625CBD73000ABB513 /* Genres.json in Resources */ = {isa = PBXBuildFile; fileRef = F6D5340525CBD73000ABB513 /* Genres.json */; };
+		F6D5347D25CC072300ABB513 /* NSDictionary+AixCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D5347225CC072300ABB513 /* NSDictionary+AixCategory.m */; };
 		F6EB8CB725AD99E40039029E /* PlaylistMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EB8CB625AD99E40039029E /* PlaylistMatch.m */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +83,14 @@
 		F6A5AC21257F0D150069ED91 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		F6A5AC22257F0D150069ED91 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		F6A5AC23257F0D150069ED91 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		F6D5339E25CB8A3900ABB513 /* GenresWebController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenresWebController.h; sourceTree = "<group>"; };
+		F6D5339F25CB8A3900ABB513 /* GenresWebController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenresWebController.m; sourceTree = "<group>"; };
+		F6D533A025CB8A3900ABB513 /* GenresWebController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenresWebController.xib; sourceTree = "<group>"; };
+		F6D533CB25CB9DEB00ABB513 /* CryptoKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoKit.framework; path = System/Library/Frameworks/CryptoKit.framework; sourceTree = SDKROOT; };
+		F6D533D025CB9E0700ABB513 /* libcryptex.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcryptex.tbd; path = usr/lib/libcryptex.tbd; sourceTree = SDKROOT; };
+		F6D5340525CBD73000ABB513 /* Genres.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Genres.json; sourceTree = "<group>"; };
+		F6D5346825CC072300ABB513 /* NSDictionary+AixCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+AixCategory.h"; sourceTree = "<group>"; };
+		F6D5347225CC072300ABB513 /* NSDictionary+AixCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+AixCategory.m"; sourceTree = "<group>"; };
 		F6EB8CB525AD99E40039029E /* PlaylistMatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaylistMatch.h; sourceTree = "<group>"; };
 		F6EB8CB625AD99E40039029E /* PlaylistMatch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaylistMatch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +127,7 @@
 				F6A5ABF1257F09F80069ED91 /* XiamiCollectTests */,
 				F6A5ABFC257F09F80069ED91 /* XiamiCollectUITests */,
 				F6A5ABD9257F09F60069ED91 /* Products */,
+				F6D533CA25CB9DEA00ABB513 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,6 +154,9 @@
 				F6A5AC10257F0B160069ED91 /* CollectRequest.m */,
 				F60B9B57258B668F00AAB167 /* SongDownloader.h */,
 				F60B9B58258B668F00AAB167 /* SongDownloader.m */,
+				F6D5340525CBD73000ABB513 /* Genres.json */,
+				F6D5346425CC072300ABB513 /* FoundationKit */,
+				F6D5339D25CB89FC00ABB513 /* Genres */,
 				F6A5AC15257F0D150069ED91 /* AFNetworking */,
 				F6A5ABE1257F09F60069ED91 /* Main.storyboard */,
 				F6A5ABE4257F09F80069ED91 /* Assets.xcassets */,
@@ -188,6 +204,34 @@
 				F6A5AC23257F0D150069ED91 /* AFHTTPSessionManager.h */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		F6D5339D25CB89FC00ABB513 /* Genres */ = {
+			isa = PBXGroup;
+			children = (
+				F6D5339E25CB8A3900ABB513 /* GenresWebController.h */,
+				F6D5339F25CB8A3900ABB513 /* GenresWebController.m */,
+				F6D533A025CB8A3900ABB513 /* GenresWebController.xib */,
+			);
+			path = Genres;
+			sourceTree = "<group>";
+		};
+		F6D533CA25CB9DEA00ABB513 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6D533D025CB9E0700ABB513 /* libcryptex.tbd */,
+				F6D533CB25CB9DEB00ABB513 /* CryptoKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6D5346425CC072300ABB513 /* FoundationKit */ = {
+			isa = PBXGroup;
+			children = (
+				F6D5346825CC072300ABB513 /* NSDictionary+AixCategory.h */,
+				F6D5347225CC072300ABB513 /* NSDictionary+AixCategory.m */,
+			);
+			path = FoundationKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,8 +338,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6D533A225CB8A3900ABB513 /* GenresWebController.xib in Resources */,
 				F6A5ABE8257F09F80069ED91 /* LaunchScreen.storyboard in Resources */,
 				F6A5ABE5257F09F80069ED91 /* Assets.xcassets in Resources */,
+				F6D5340625CBD73000ABB513 /* Genres.json in Resources */,
 				F6A5ABE3257F09F60069ED91 /* Main.storyboard in Resources */,
 				F670C61325A549720068CA33 /* collectResult.json in Resources */,
 			);
@@ -330,10 +376,12 @@
 				F6A5AC26257F0D150069ED91 /* AFURLSessionManager.m in Sources */,
 				F6A5AC25257F0D150069ED91 /* AFHTTPSessionManager.m in Sources */,
 				F6A5AC29257F0D150069ED91 /* AFSecurityPolicy.m in Sources */,
+				F6D533A125CB8A3900ABB513 /* GenresWebController.m in Sources */,
 				F6A5ABDE257F09F60069ED91 /* SceneDelegate.swift in Sources */,
 				F6EB8CB725AD99E40039029E /* PlaylistMatch.m in Sources */,
 				F6A5AC24257F0D150069ED91 /* AFURLResponseSerialization.m in Sources */,
 				F6A5AC27257F0D150069ED91 /* AFURLRequestSerialization.m in Sources */,
+				F6D5347D25CC072300ABB513 /* NSDictionary+AixCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -453,6 +502,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -509,17 +559,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = XiamiCollect/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XiamiCollect/XiamiCollect-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -532,17 +585,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5HBZKTVHGQ;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = XiamiCollect/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AixCoder.XiamiCollect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XiamiCollect/XiamiCollect-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

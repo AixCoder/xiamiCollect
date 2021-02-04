@@ -18,7 +18,13 @@
 
 - (void)start
 {
-    
+//    if (DEBUG) {
+//        float f = 19.999999;
+//        
+//        NSLog(@"保留一位: %@",[self notRounding:f afterPoint:1]);
+//        return;
+//    }
+    //
     NSURLRequest *playListReq = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://autumnfish.cn/user/playlist?uid=40261911&limit=4"]];
     
     _dataTask = [[AFHTTPSessionManager manager] dataTaskWithRequest:playListReq
@@ -151,5 +157,21 @@
     }];
     
     [_dataTask resume];
+}
+
+-(NSString *)notRounding:(float)price afterPoint:(int)position{
+    
+    NSDecimalNumberHandler* roundingBehavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                                                                                      scale:position
+                                                                                           raiseOnExactness:NO
+                                                                                            raiseOnOverflow:NO
+                                                                                           raiseOnUnderflow:NO raiseOnDivideByZero:NO];
+    NSDecimalNumber *ouncesDecimal;
+    NSDecimalNumber *roundedOunces;
+
+    ouncesDecimal = [[NSDecimalNumber alloc] initWithFloat:price];
+    roundedOunces = [ouncesDecimal decimalNumberByRoundingAccordingToBehavior:roundingBehavior];
+    
+    return [NSString stringWithFormat:@"%@",roundedOunces];
 }
 @end
