@@ -112,7 +112,12 @@
             type = @"png";
         }else if ([response.MIMEType isEqualToString:@"image/jpeg"]){
             type = @"jpeg";
-        }else{
+        }else if ([response.MIMEType isEqualToString:@"image/jpg"]) {
+            type = @"jpg";
+        }else if ([response.MIMEType isEqualToString:@"image/gif"]) {
+            type = @"gif";
+        }else  {
+            NSLog(@"下载图片格式---不支持");
             NSAssert(false, @"下载图片格式---不支持");
             return [NSURL URLWithString:@""];
         }
