@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     
     let downloadButton = UIButton(type: .custom)
     let genresButton = UIButton(type: .custom)
+    let favoriteButton = UIButton(type: .custom)
     
     var downloadIndex = 0
     let collectURLS = ["https://music.xiami.com/resource/collect/v2/detail/1059958/3105065/1467078216?auth_key=1609999835-0-0-38723b29ae8ffaa9aaf958ddbbc629de",
@@ -34,6 +35,9 @@ class ViewController: UIViewController {
     @objc func injected() {
         //
 //        downloadCollectTapped()
+        
+//        extractorCollect()
+        
     }
     
     override func viewDidLoad() {
@@ -62,6 +66,12 @@ class ViewController: UIViewController {
         genresButton.frame = CGRect.init(x: 200, y: 160, width: 100, height: 40)
         genresButton.addTarget(self, action: #selector(genresButtonTapped), for: .touchUpInside)
         view.addSubview(genresButton)
+        
+        favoriteButton.setTitle("♥️", for: .normal)
+        favoriteButton.setTitleColor(.red, for: .normal)
+        favoriteButton.frame = CGRect.init(x: 200, y: 230, width: 100, height: 40)
+        favoriteButton.addTarget(self, action: #selector(favoriteSongButtonTapped), for: .touchUpInside)
+        view.addSubview(favoriteButton)
     
     }
     
@@ -69,14 +79,15 @@ class ViewController: UIViewController {
         
         collectReq.request(withCollectURL: collectUrl,
                            key:"") {[weak self] (responseString) in
-            
+
             let data = responseString.data(using: .utf8)
             let JSON = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments)
             self?.downloadCollect(JSON as! Dictionary<String, Any>)
-            
+
         } failure: { (error) in
-            
+
         }
+        
     }
 
     func downloadCollect(_ JSON: Dictionary<String, Any>)  {
@@ -91,7 +102,6 @@ class ViewController: UIViewController {
         let data: NSData = try! JSONSerialization.data(withJSONObject: JSON, options: .prettyPrinted) as NSData
         
         let path = Bundle.main.path(forResource: "collectResult", ofType: "json")
-        
         var xiamiCollect: Dictionary<String, Any> = [:]
         
         let url = URL(fileURLWithPath: path!)
@@ -245,7 +255,16 @@ class ViewController: UIViewController {
     func startDownloadSong(_ songsList: Array<Dictionary <String, Any>>, downloadQueueNum: Int, downloadPath: String) {
         
         let songObj = songsList[downloadQueueNum]
-        let songName = songObj["songName"] as! String
+        var songName = songObj["songName"] as! String
+        
+        if songName == "上集：主播鸟幻/陈腹黑/阿鼓" {
+            songName = "上集鸟幻-陈腹黑-阿鼓"
+        }
+        
+        if songName == "下集：主播萝香香/逢夏" {
+            songName = "下集：主播萝香香-逢夏"
+        }
+        
         let songFiles = songObj["listenFiles"] as! Array<Dictionary <String, Any>>
         var fileURL = ""
         var fileFormat = ""
@@ -375,10 +394,38 @@ class ViewController: UIViewController {
     
     @objc func downloadCollectTapped() {
         
-        let url = "https://music.xiami.com/resource/collect/v2/detail/466252/811942/1483789830?auth_key=1612354213-0-0-80654c0e12bed208bbe20b3df72e2b62"
+//        let url = "https://music.xiami.com/resource/collect/v2/detail/412054768/1331544702/1612445189?auth_key=1612461076-0-0-ff65d9990d00203a27877a9284e41015"
+//
+//        prepareToDownloadCollect(url)
         
-        prepareToDownloadCollect(url)
+        extractorCollect()
         
+        
+    }
+    
+    
+    func extractorCollect() {
+        
+        let path = Bundle.main.path(forResource: "collectString", ofType: "json")
+        let url = URL(fileURLWithPath: path!)
+                      /*
+                         * try 发生异常会跳到catch代码中
+                         * try! 发生异常程序会直接crash
+                         */
+                    let jsonData = try? Data(contentsOf: url)
+        let jsonObj:Any = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.mutableContainers) as Any
+        
+                let jsonDic = jsonObj as! Dictionary<String, Any>
+        
+//            resultObj
+            let data = jsonDic["data"] as! Dictionary<String, Any>
+            let sub_data = data["data"] as! Dictionary<String, Any>
+            
+            let collectDetail = sub_data["collectDetail"] as! Dictionary<String,Any>
+            
+            let responseData = ["resultObj": collectDetail]
+            downloadCollect(responseData)
+            
     }
     
     @objc func genresButtonTapped() {
@@ -389,6 +436,15 @@ class ViewController: UIViewController {
 
         self.present(navController, animated: true) {}
         
+    }
+    
+    @objc func favoriteSongButtonTapped() {
+        
+        let vc = FavoriteSongsVC.init()
+        
+        self.present(vc, animated: true) {
+            
+        }
     }
 }
 

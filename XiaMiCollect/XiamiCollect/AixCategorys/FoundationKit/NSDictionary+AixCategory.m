@@ -7,7 +7,6 @@
 //
 
 #import "NSDictionary+AixCategory.h"
-//#import "AixDebugLog.h"
 
 @implementation NSDictionary (AixCategory)
 
@@ -44,7 +43,7 @@
         }
     }
     
-//    AixDebugLog(@"dictionary not have key:%@",key)
+    NSLog(@"dictionary not have key:%@",key);
 
     return @"";
 }
@@ -79,7 +78,7 @@
             return @[];
         }
     }
-//    AixDebugLog(@"dictionary not have key:%@",key)
+    NSLog(@"dictionary not have key:%@",key);
     return @[];
     
 }
@@ -95,7 +94,7 @@
             return @{};
         }
     }
-//    AixDebugLog(@"dictionary not have key:%@",key)
+    NSLog(@"dictionary not have key:%@",key);
     return @{};
 }
 
