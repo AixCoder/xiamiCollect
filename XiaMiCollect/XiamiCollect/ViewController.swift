@@ -400,7 +400,6 @@ class ViewController: UIViewController {
         
         extractorCollect()
         
-        
     }
     
     

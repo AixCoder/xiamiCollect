@@ -14,10 +14,57 @@
             filePath = "XiamiCollect/Genres/GenresWebController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1133"
-            endingLineNumber = "1133"
+            startingLineNumber = "1390"
+            endingLineNumber = "1390"
             landmarkName = "-getGenreDetail:type:success:failure:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "49716DF1-D569-4D66-95FB-D9736A8292F4 - 97f609b275a96b28"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GenresWebController getGenreDetail:type:success:failure:]"
+                  moduleName = "XiamiCollect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1390"
+                  endingLineNumber = "1390"
+                  offsetFromSymbolStart = "548">
+               </Location>
+               <Location
+                  uuid = "49716DF1-D569-4D66-95FB-D9736A8292F4 - 2f3a438d90dc9e6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GenresWebController getGenreDetail:type:success:failure:]"
+                  moduleName = "eval101.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1390"
+                  endingLineNumber = "1390"
+                  offsetFromSymbolStart = "548">
+               </Location>
+               <Location
+                  uuid = "49716DF1-D569-4D66-95FB-D9736A8292F4 - 2fb99a1da40db868"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GenresWebController getGenreDetail:type:success:failure:]"
+                  moduleName = "eval102.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1390"
+                  endingLineNumber = "1390"
+                  offsetFromSymbolStart = "548">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -30,152 +77,55 @@
             filePath = "XiamiCollect/Genres/GenresWebController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1197"
-            endingLineNumber = "1197"
+            startingLineNumber = "1454"
+            endingLineNumber = "1454"
             landmarkName = "-getGenreDetail:type:success:failure:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F4282F26-37F6-4D0E-95E4-784E55308150"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XiamiCollect/Genres/GenresWebController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "-sendRequestWithAPI:cookies:requestDic:"
-            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "F4282F26-37F6-4D0E-95E4-784E55308150 - 5c4de231751bd784"
+                  uuid = "865C0A3F-9EF6-4972-AFE4-D7721C9AF0F8 - 9fc3923118ed3b1a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[GenresWebController webViewDidFinishLoad:]"
+                  symbolName = "__59-[GenresWebController getGenreDetail:type:success:failure:]_block_invoke"
                   moduleName = "XiamiCollect"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
-                  offsetFromSymbolStart = "1720">
+                  startingLineNumber = "1454"
+                  endingLineNumber = "1454"
+                  offsetFromSymbolStart = "489">
                </Location>
                <Location
-                  uuid = "F4282F26-37F6-4D0E-95E4-784E55308150 - 9877c7b1d1ea9e90"
+                  uuid = "865C0A3F-9EF6-4972-AFE4-D7721C9AF0F8 - 270fd80efd98ce59"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__61-[GenresWebController sendRequestWithAPI:cookies:requestDic:]_block_invoke"
-                  moduleName = "eval134.dylib"
+                  symbolName = "__59-[GenresWebController getGenreDetail:type:success:failure:]_block_invoke"
+                  moduleName = "eval101.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
-                  offsetFromSymbolStart = "208">
+                  startingLineNumber = "1454"
+                  endingLineNumber = "1454"
+                  offsetFromSymbolStart = "489">
                </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9AB69782-5CAA-46DC-B503-E85227631BB9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XiamiCollect/Genres/GenresWebController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-            <Locations>
                <Location
-                  uuid = "9AB69782-5CAA-46DC-B503-E85227631BB9 - 2846ee87949368d7"
+                  uuid = "865C0A3F-9EF6-4972-AFE4-D7721C9AF0F8 - 278c019ec949e85a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[GenresWebController startSaveStyleContent:atIndex:]"
-                  moduleName = "XiamiCollect"
+                  symbolName = "__59-[GenresWebController getGenreDetail:type:success:failure:]_block_invoke"
+                  moduleName = "eval102.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "155">
-               </Location>
-               <Location
-                  uuid = "9AB69782-5CAA-46DC-B503-E85227631BB9 - 478d3e29512567a9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[GenresWebController viewDidLoad]"
-                  moduleName = "eval134.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "524">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E6D01FDE-8106-4878-8C8E-729187080362"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XiamiCollect/Genres/GenresWebController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "-sendRequestWithAPI:cookies:requestDic:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E6D01FDE-8106-4878-8C8E-729187080362 - 5c4de231751bd4cb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[GenresWebController webViewDidFinishLoad:]"
-                  moduleName = "XiamiCollect"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "116"
-                  endingLineNumber = "116"
-                  offsetFromSymbolStart = "981">
-               </Location>
-               <Location
-                  uuid = "E6D01FDE-8106-4878-8C8E-729187080362 - a83fa63ace0ca0f7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[GenresWebController sendRequestWithAPI:cookies:requestDic:]"
-                  moduleName = "eval134.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "116"
-                  endingLineNumber = "116"
-                  offsetFromSymbolStart = "871">
+                  startingLineNumber = "1454"
+                  endingLineNumber = "1454"
+                  offsetFromSymbolStart = "489">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -194,6 +144,321 @@
             endingLineNumber = "130"
             landmarkName = "unknown"
             landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "869C57CF-19AC-4204-B80F-5F4063A28EFD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XiamiCollect/Genres/GenresWebController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "-sendRequestWithAPI:model:success:failure:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "869C57CF-19AC-4204-B80F-5F4063A28EFD - 39a9b27b0cd9f666"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[GenresWebController sendRequestWithAPI:model:success:failure:]_block_invoke"
+                  moduleName = "XiamiCollect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "395">
+               </Location>
+               <Location
+                  uuid = "869C57CF-19AC-4204-B80F-5F4063A28EFD - 8165f844e9ac0325"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[GenresWebController sendRequestWithAPI:model:success:failure:]_block_invoke"
+                  moduleName = "eval101.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "395">
+               </Location>
+               <Location
+                  uuid = "869C57CF-19AC-4204-B80F-5F4063A28EFD - 81e621d4dd7d2526"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[GenresWebController sendRequestWithAPI:model:success:failure:]_block_invoke"
+                  moduleName = "eval102.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "295"
+                  endingLineNumber = "295"
+                  offsetFromSymbolStart = "395">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BF6D5153-AE03-4A47-9397-98466BC7E222"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XiamiCollect/Genres/GenresWebController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
+            landmarkName = "-backupCollectsInfo:atIndex:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BF6D5153-AE03-4A47-9397-98466BC7E222 - 1128340926a3beea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[GenresWebController backupCollectsInfo:atIndex:]_block_invoke"
+                  moduleName = "XiamiCollect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
+                  offsetFromSymbolStart = "1813">
+               </Location>
+               <Location
+                  uuid = "BF6D5153-AE03-4A47-9397-98466BC7E222 - a9e47e36c3d64ba9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[GenresWebController backupCollectsInfo:atIndex:]_block_invoke"
+                  moduleName = "eval101.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
+                  offsetFromSymbolStart = "1813">
+               </Location>
+               <Location
+                  uuid = "BF6D5153-AE03-4A47-9397-98466BC7E222 - a967a7a6f7076daa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[GenresWebController backupCollectsInfo:atIndex:]_block_invoke"
+                  moduleName = "eval102.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "201"
+                  endingLineNumber = "201"
+                  offsetFromSymbolStart = "1813">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3BB5860C-D61F-46C0-AA08-475D008CEBE0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XiamiCollect/Genres/GenresWebController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-backupCollectsInfo:atIndex:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3BB5860C-D61F-46C0-AA08-475D008CEBE0 - 1128340926a3bde3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[GenresWebController backupCollectsInfo:atIndex:]_block_invoke"
+                  moduleName = "XiamiCollect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "719">
+               </Location>
+               <Location
+                  uuid = "3BB5860C-D61F-46C0-AA08-475D008CEBE0 - a9e47e36c3d648a0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[GenresWebController backupCollectsInfo:atIndex:]_block_invoke"
+                  moduleName = "eval101.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "719">
+               </Location>
+               <Location
+                  uuid = "3BB5860C-D61F-46C0-AA08-475D008CEBE0 - a967a7a6f7076ea3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__50-[GenresWebController backupCollectsInfo:atIndex:]_block_invoke"
+                  moduleName = "eval102.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "178"
+                  endingLineNumber = "178"
+                  offsetFromSymbolStart = "719">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2687146B-0745-45DF-BA06-58BD473664C6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XiamiCollect/Genres/GenresWebController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
+            landmarkName = "-injected"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2687146B-0745-45DF-BA06-58BD473664C6 - 1cd98abad6b51982"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GenresWebController injected]"
+                  moduleName = "XiamiCollect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "399"
+                  endingLineNumber = "399"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "2687146B-0745-45DF-BA06-58BD473664C6 - a415c08533c0ec03"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GenresWebController injected]"
+                  moduleName = "eval101.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "401"
+                  endingLineNumber = "401"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "2687146B-0745-45DF-BA06-58BD473664C6 - a49619150711cac2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[GenresWebController injected]"
+                  moduleName = "eval102.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "399"
+                  endingLineNumber = "399"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EE3C953-408D-4A53-ACF9-26BFCD4FC103"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XiamiCollect/Genres/GenresWebController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-requestRecommendCollects:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5EE3C953-408D-4A53-ACF9-26BFCD4FC103 - 976835a784f8e6f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__48-[GenresWebController requestRecommendCollects:]_block_invoke"
+                  moduleName = "XiamiCollect"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "233">
+               </Location>
+               <Location
+                  uuid = "5EE3C953-408D-4A53-ACF9-26BFCD4FC103 - 2fa47f98618d13b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__48-[GenresWebController requestRecommendCollects:]_block_invoke"
+                  moduleName = "eval101.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "233">
+               </Location>
+               <Location
+                  uuid = "5EE3C953-408D-4A53-ACF9-26BFCD4FC103 - 2f27a608555c35b5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__48-[GenresWebController requestRecommendCollects:]_block_invoke"
+                  moduleName = "eval102.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuhongnian/Desktop/Work/xiamiCollect/XiamiCollect/XiamiCollect/Genres/GenresWebController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "233">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

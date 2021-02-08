@@ -10,6 +10,8 @@
 #import <CommonCrypto/CommonHMAC.h>
 
 #import "NSDictionary+AixCategory.h"
+#import "NSArray+AixCategory.h"
+#import "SongDownloader.h"
 
 @interface GenresWebController ()<UIWebViewDelegate>
 
@@ -18,6 +20,10 @@
 @property (strong, nonatomic) NSMutableDictionary *cookieDic;
 
 @property (nonatomic , copy) void(^styleCollectCompletion)(void);
+
+@property (nonatomic, strong) UIButton *recommendedBtn;
+
+@property (nonatomic, strong) PicDownloader *logoPicDownloader;
 
 @end
 
@@ -28,102 +34,347 @@
     // Do any additional setup after loading the view from its nib.
     _cookieDic = [NSMutableDictionary dictionary];
     
-    NSString *webUrl = @"https://www.xiami.com/genre/gid/5";
-    _webView.delegate = self;
     
+    _recommendedBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 100, 60, 40)];
+    [_recommendedBtn setTitle:@"recommend"
+                     forState:UIControlStateNormal];
+    [_recommendedBtn setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
     
-    NSString *ok = @"{\"requestStr\":\"{\\\"header\\\":{\\\"platformId\\\":\\\"mac\\\",\\\"remoteIp\\\":\\\"192.168.31.103\\\",\\\"callId\\\":1612607663014,\\\"sign\\\":\\\"1207c400aa14dbc0be48a9276a5a392f\\\",\\\"appId\\\":200,\\\"deviceId\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\",\\\"accessToken\\\":\\\"056688b9a35dfd32fc1cb031461f353e943i21\\\",\\\"openId\\\":36244617,\\\"network\\\":1,\\\"appVersion\\\":3010300,\\\"resolution\\\":\\\"1178*704\\\",\\\"utdid\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\"},\\\"model\\\":{\\\"limit\\\":100,\\\"page\\\":1,\\\"userId\\\":36244617}}\"}";
+    [_recommendedBtn addTarget:self
+                        action:@selector(recommendBtnTapped)
+              forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_recommendedBtn];
     
-    NSData *jsonData = [ok dataUsingEncoding:NSUTF8StringEncoding];
-     
-    NSError *err;
-     
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&err];
-     if(err) {
-         NSLog(@"json解析失败：%@",err);
-     }
-    
-//    {\"requestStr\":\"{\\\"header\\\":{\\\"platformId\\\":\\\"mac\\\",\\\"remoteIp\\\":\\\"192.168.31.103\\\",\\\"callId\\\":1612607663014,\\\"sign\\\":\\\"1207c400aa14dbc0be48a9276a5a392f\\\",\\\"appId\\\":200,\\\"deviceId\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\",\\\"accessToken\\\":\\\"056688b9a35dfd32fc1cb031461f353e943i21\\\",\\\"openId\\\":36244617,\\\"network\\\":1,\\\"appVersion\\\":3010300,\\\"resolution\\\":\\\"1178*704\\\",\\\"utdid\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\"},\\\"model\\\":{\\\"limit\\\":100,\\\"page\\\":1,\\\"userId\\\":36244617}}\"}
+    self.logoPicDownloader = [[PicDownloader alloc] init];
+}
 
-    NSDictionary *header = @{@"platformId": @"mac",
-                             @"remoteIp": @"192.168.31.103",
-                             @"callId": @(1612607663014),
-                             @"sign": @"1207c400aa14dbc0be48a9276a5a392f",
-                             @"appId": @"200",
-                             @"deviceId":@"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7",
-                             @"accessToken": @"056688b9a35dfd32fc1cb031461f353e943i21",
-                             @"openId": @(36244617),
-                             @"network":@(1),
-                             @"appVersion":@(3010300),
-                             @"resolution":@"1178*704",
-                             @"utdid":@"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7"};
+- (void)recommendBtnTapped {
     
-    NSDictionary *model = @{@"limit":@(100),
-                            @"page":@(1),
-                            @"userId":@(36244617)};
-    
-    NSString *request = @{@"header":header,
-                          @"model":model}.toJsonString;
-    
-    
-    NSDictionary *request_dic = @{@"requestStr":request};
-    [self sendRequestWithAPI:nil cookies:nil requestDic:request_dic];
+    [self requestRecommendCollects:1];
     
 }
 
-- (void)injected
+//- (void)requestHotCollects:(int)page {
+//
+//    NSDictionary *model = @{@"key":@"爵士",
+//                            @"limit":@(100),
+//                            @"order":@"recommend",
+//                            @"page":@(page)};
+//
+//    NSString *api = @"mtop.alimusic.music.list.collectservice.getcollects";
+//
+//    __weak typeof(self) weakSelf = self;
+//    [self sendRequestWithAPI:api
+//                       model:model
+//                     success:^(NSDictionary *resultData) {
+//
+//        NSDictionary *data = [[resultData x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
+//
+//        NSArray *collects = [data x_arrayValueForKey:@"collects"];
+//
+//        if (collects.count == 0) {
+//            NSLog(@"热门歌单集合为空---不备份");
+//        }
+//
+//        [weakSelf backupCollectsInfo:collects
+//                             atIndex:0];
+//
+//    }
+//
+//                     failure:^(NSError *error) {
+//
+//        NSLog(@"获取第%d页推荐歌单失败------%@",page,error);
+//
+//    }];
+//
+//}
+
+- (void)requestRecommendCollects:(int )page
 {
     
+    NSDictionary *model = @{@"key":@"法语",
+                            @"limit":@(100),
+                            @"order":@"recommend",
+                            @"page":@(page)};
+    
+    NSString *api = @"mtop.alimusic.music.list.collectservice.getcollects";
+    
+    __weak typeof(self) weakSelf = self;
+    [self sendRequestWithAPI:api
+                       model:model
+                     success:^(NSDictionary *resultData) {
+        
+        NSDictionary *data = [[resultData x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
+        
+        NSArray *collects = [data x_arrayValueForKey:@"collects"];
+        
+        if (collects.count == 0) {
+            NSLog(@"热门歌单集合为空---不备份");
+        }
+        
+        [weakSelf backupCollectsInfo:collects
+                             atIndex:0];
+        
+    }
+        
+                     failure:^(NSError *error) {
+
+        NSLog(@"获取第%d页推荐歌单失败------%@",page,error);
+        
+    }];
+    
 }
+
+- (void)backupCollectsInfo:(NSArray *)collects atIndex:(NSInteger)index {
+    
+    __weak typeof(self) weakSelf = self;
+    
+    if (index >= collects.count) {
+        NSLog(@"%lu个歌单信息保存完毕", (unsigned long)collects.count);
+        return;
+    }
+    
+    //request collect detail
+    NSString *listid = [[collects objectAtIndex:index] x_stringValueForKey:@"listId"];
+    
+    NSDictionary *model = @{@"listId": listid,
+                            @"isFullTags": [NSNumber numberWithBool:YES],
+                            @"pagingVO":@{@"pageSize": @(100),
+                                          @"page": @(1)}};
+    
+    [self sendRequestWithAPI:@"mtop.alimusic.music.list.collectservice.getcollectdetail" model:model success:^(NSDictionary *response) {
+            
+        //save collect detail info to json file
+        NSDictionary *data = [[response x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
+        
+        NSDictionary *detail = [data x_dictionaryValueForKey:@"collectDetail"];
+        //ignore empty play list
+        NSArray *songs = [detail x_arrayValueForKey:@"songs"];
+        
+        if (songs.count == 0 || songs.count < 3 ) {
+            
+            NSLog(@"歌曲数太少，备份下一个歌单");
+            
+            NSInteger next = index + 1;
+            [weakSelf backupCollectsInfo:collects atIndex:next];
+            
+        }else{
+            
+            NSData *data = [NSJSONSerialization dataWithJSONObject:response
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:nil];
+            
+            NSString *playlistid = [detail x_stringValueForKey:@"listId"];
+            if ([playlistid isEqualToString:listid]) {
+                
+                NSString *listFileName = [NSString stringWithFormat:@"%@.json",playlistid];
+                
+                NSString *listRootPath = @"/Users/liuhongnian/Desktop/待处理歌单/Recommend";
+                NSString *JSONPath = [listRootPath stringByAppendingPathComponent:listFileName];
+                
+                BOOL saveCellectDetailSuccess = [data writeToFile:JSONPath
+                                                       atomically:YES];
+                if (!saveCellectDetailSuccess) {
+                    NSLog(@"保存歌单详情json 文件失败");
+                }else{
+                    NSLog(@"第%ld个歌单success",index + 1);
+                    //downloader collect logo pic
+                    NSString *logoUrl = [detail x_stringValueForKey:@"collectLogoLarge"];
+                    
+                    NSString *collectSavePath = [listRootPath stringByAppendingPathComponent:@"image/collectCover"];
+                    
+                    if (![NSFileManager.defaultManager fileExistsAtPath:collectSavePath]) {
+                       BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:collectSavePath withIntermediateDirectories:YES attributes:nil error:NULL];
+                        NSAssert(created, @"歌单封面文件夹创建失败");
+                    }
+                    
+                    NSString *logoFileName = [NSString stringWithFormat:@"collectLogoL_%@",playlistid];
+                    
+                    [weakSelf.logoPicDownloader downloadWithURL:logoUrl localPath:collectSavePath picName:logoFileName success:^{
+                        
+                                        } failure:^(NSError * _Nonnull error) {
+                                            NSLog(@"下载歌单%@封面失败啦",playlistid);
+                                        }];
+                }
+                
+                if (songs.count > 100) {
+                    NSLog(@"捞到大鱼😆");
+                }
+                
+                //download collect logo
+                
+                NSInteger nextCollectIndex = index + 1;
+                [self backupCollectsInfo:collects
+                                 atIndex:nextCollectIndex];
+                
+            }
+
+        }
+        
+        
+
+        
+
+        } failure:^(NSError *error) {
+            
+            NSLog(@"歌单详情获取失败: %@",error);
+        }];
+    
+    
+    
+}
+
 
 - (void)sendRequestWithAPI:(NSString *)api
-                   cookies:(NSDictionary *)cookie
-                requestDic:(NSDictionary *)requestStrDic
+                     model:(NSDictionary*)model
+                   success:(void(^)(NSDictionary *resultData))success
+                   failure:(void(^)(NSError *error))failured
 {
-
+    
+    NSDictionary *header = @{@"platformId":@"mac"};
+    
+    NSString *requestStr = @{@"header":header,
+                             @"model":model}.toJsonString;
+    NSDictionary *data = @{@"requestStr":requestStr};
+    
     NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
- 
     NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
 
-    
-    NSURL* URL = [NSURL URLWithString:@"https://h5api.m.xiami.com/h5/mtop.alimusic.music.list.collectservice.getcollectbyuser/1.0/"];
+    NSString *apiPath = [NSString stringWithFormat:@"https://acs.m.xiami.com/h5/%@/1.0/",api];
+    NSURL* URL = [NSURL URLWithString:apiPath];
     
     //sigin
-    NSString *_m_h5_tk = @"0a205cdea29279bcc222c68dc4649330_1612616123075";
+    NSString *_m_h5_tk = @"a0d67db9d417d6bcf2a864d2b9a98b8d_1612781214477";
+    NSString *_m_h5_tk_enc = @"f6e6c30db060f1d78e5ab10860cf1e9e";
+    
     NSString *token = [_m_h5_tk componentsSeparatedByString:@"_"].firstObject;
-    NSString *t = @"1612607663040";
-    NSString *appkey = @"23649156";
-    NSString *requestString = requestStrDic.toJsonString;
+    NSString *t = @"1612763225000";
+    NSString *appkey = @"12574478";
     
-    NSString *sign = [NSString stringWithFormat:@"%@&%@&%@&%@",token,t,appkey,requestString];
+    NSString *dataString = data.toJsonString;
+    
+    NSString *sign_org = [NSString stringWithFormat:@"%@&%@&%@&%@",token,t,appkey,dataString];
+    NSString *sign = [self hMacMD5String:sign_org];
         
-    //ok的string
-//{"requestStr":"{\"header\":{\"platformId\":\"mac\",\"remoteIp\":\"192.168.31.103\",\"callId\":1612601183195,\"sign\":\"6d53f8facf97811c9018c2fb0f42d92f\",\"appId\":200,\"deviceId\":\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\",\"accessToken\":\"056688b9a35dfd32fc1cb031461f353e943i21\",\"openId\":36244617,\"network\":1,\"appVersion\":3010300,\"resolution\":\"1178*704\",\"utdid\":\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\"},\"model\":{\"limit\":100,\"page\":1,\"userId\":36244617}}"}
-    
-    
-    
-    
     NSDictionary* URLParams = @{
-        @"appKey": @"12574478",
-        @"t": @"1612607663040",
-        @"sign": @"65b88a4668dd5c504d402564d1e25396",
+        @"appKey": appkey,
+        @"t": t,
+        @"sign": sign,
         @"v": @"1.0",
         @"type": @"originaljson",
         @"dataType": @"json",
-        @"api": @"mtop.alimusic.music.list.collectservice.getcollectbyuser",
-        @"data": requestString
+        @"api": api,
+        @"data": dataString
     };
-
     
     URL = NSURLByAppendingQueryParameters(URL, URLParams);
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
     request.HTTPMethod = @"GET";
 
     // Headers
-    [request addValue:@"xmgid=7515f88b-9f92-4136-a94b-8a9dc16f3df9;gid=161258351560621;_xiamitoken=acadd85ddd5e3fc88637234d30cb6de7;_unsign_token=4a27c13c0015f3958a51a8b948a3d85f;_m_h5_tk=0a205cdea29279bcc222c68dc4649330_1612616123075;_m_h5_tk_enc=3a356c322bd5642033965a2abf4b467f" forHTTPHeaderField:@"Cookie"];
+    NSString *cookieString = [NSString stringWithFormat:@"xmgid=2cf10f00-375a-41b9-bdd9-ae42e9c7e10c;xm_oauth_state=d2865f94c017103a45b3b297e0924fc1;_m_h5_tk=%@;_m_h5_tk_enc=%@", _m_h5_tk, _m_h5_tk_enc];
+    
+    [request addValue:cookieString forHTTPHeaderField:@"Cookie"];
 
+    /* Start a new Task */
+    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            // Success
+            NSError *errorJson;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                                 options:kNilOptions
+                                                                   error:&errorJson];
+            
+            NSString *ret = [json x_arrayValueForKey:@"ret"].firstObject;
+            if ([ret isEqualToString:@"SUCCESS::调用成功"]) {
+                
+                success(json);
+                
+            }else {
+                
+                NSLog(@"请求%@失败:%@",api, error);
+                failured(nil);
+            }
+
+            
+        }
+        else {
+            // Failure
+            NSLog(@"请求%@失败:%@",api, error);
+        }
+    }];
+    
+    [task resume];
+    [session finishTasksAndInvalidate];
+
+}
+
+- (void)testfavoriteCollects {
+    
+//    {"requestStr":"{\"header\":{\"platformId\":\"mac\",\"remoteIp\":\"192.168.2.1\",\"callId\":1612758488363,\"sign\":\"5a2519b9271f67d159b06f92b1d7b12f\",\"appId\":200,\"deviceId\":\"b2dd9481a676a0449898aa1c3e151d0fd60e59290db44584961a2b67929fcc52\",\"accessToken\":\"3680110e80969af61e297b841d7c31e8943i21\",\"openId\":36244617,\"network\":1,\"appVersion\":3010300,\"resolution\":\"1178*704\",\"utdid\":\"b2dd9481a676a0449898aa1c3e151d0fd60e59290db44584961a2b67929fcc52\"},\"model\":{\"userId\":36244617,\"pagingVO\":{\"page\":1,\"pageSize\":100}}}"}
+    
+//    2871
+//    2871
+    NSDictionary *header = @{@"platformId":@"mac"};
+    
+    NSDictionary *model = @{
+        @"userId":@(2871),
+        @"pagingVO":@{@"page":@(1),
+                      @"pageSize":@(100)}
+    };
+    
+    
+    NSString *requestStr = @{@"header":header,
+                          @"model":model}.toJsonString;
+    
+    NSDictionary *request_dic = @{@"requestStr":requestStr};
+    [self favoriteCollectsRequest:request_dic];
+    
+}
+
+- (void)favoriteCollectsRequest:(NSDictionary *)requestStrDic
+{
+    
+    NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+
+    
+    NSURL* URL = [NSURL URLWithString:@"https://acs.m.xiami.com/h5/mtop.alimusic.fav.collectfavoriteservice.getfavoritecollects/1.0/"];
+    
+    NSString *_m_h5_tk = @"ba797ddff5a9fadf09e936b36b6fe076_1612763016816";
+    
+    NSString *token = [_m_h5_tk componentsSeparatedByString:@"_"].firstObject;
+    NSString *t = @"1612758488370";
+    NSString *appkey = @"12574478";
+    NSString *requestString = requestStrDic.toJsonString;
+    
+    NSString *sign_org = [NSString stringWithFormat:@"%@&%@&%@&%@",token,t,appkey,requestString];
+    //sigin
+    NSString *sign = [self hMacMD5String:sign_org];
+        
+    NSDictionary* URLParams = @{
+        @"appKey": appkey,
+        @"t": t,
+        @"sign": sign,
+        @"v": @"1.0",
+        @"type": @"originaljson",
+        @"dataType": @"json",
+        @"api": @"mtop.alimusic.fav.collectfavoriteservice.getfavoritecollects",
+        @"data": requestString
+    };
+    
+    
+    URL = NSURLByAppendingQueryParameters(URL, URLParams);
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+    request.HTTPMethod = @"GET";
+
+    
+    // Headers
+    [request addValue:@"xmgid=2cf10f00-375a-41b9-bdd9-ae42e9c7e10c;xm_oauth_state=d2865f94c017103a45b3b297e0924fc1;_m_h5_tk=ba797ddff5a9fadf09e936b36b6fe076_1612763016816;_m_h5_tk_enc=e82ed0f272ed659c4effdfc3afc02b1c"
+   forHTTPHeaderField:@"Cookie"];
+
+    return;
+    
     /* Start a new Task */
     NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
@@ -141,6 +392,12 @@
     [task resume];
     [session finishTasksAndInvalidate];
 
+}
+
+- (void)injected
+{
+    [self requestRecommendCollects:1];
+    
 }
 
 
