@@ -32,46 +32,102 @@
     _webView.delegate = self;
     
     
-    NSString *ok = @"{\"requestStr\":\"{\\\"header\\\":{\\\"platformId\\\":\\\"mac\\\",\\\"remoteIp\\\":\\\"192.168.31.103\\\",\\\"callId\\\":1612607663014,\\\"sign\\\":\\\"1207c400aa14dbc0be48a9276a5a392f\\\",\\\"appId\\\":200,\\\"deviceId\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\",\\\"accessToken\\\":\\\"056688b9a35dfd32fc1cb031461f353e943i21\\\",\\\"openId\\\":36244617,\\\"network\\\":1,\\\"appVersion\\\":3010300,\\\"resolution\\\":\\\"1178*704\\\",\\\"utdid\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\"},\\\"model\\\":{\\\"limit\\\":100,\\\"page\\\":1,\\\"userId\\\":36244617}}\"}";
-    
-    NSData *jsonData = [ok dataUsingEncoding:NSUTF8StringEncoding];
-     
-    NSError *err;
-     
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&err];
-     if(err) {
-         NSLog(@"json解析失败：%@",err);
-     }
-    
 //    {\"requestStr\":\"{\\\"header\\\":{\\\"platformId\\\":\\\"mac\\\",\\\"remoteIp\\\":\\\"192.168.31.103\\\",\\\"callId\\\":1612607663014,\\\"sign\\\":\\\"1207c400aa14dbc0be48a9276a5a392f\\\",\\\"appId\\\":200,\\\"deviceId\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\",\\\"accessToken\\\":\\\"056688b9a35dfd32fc1cb031461f353e943i21\\\",\\\"openId\\\":36244617,\\\"network\\\":1,\\\"appVersion\\\":3010300,\\\"resolution\\\":\\\"1178*704\\\",\\\"utdid\\\":\\\"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7\\\"},\\\"model\\\":{\\\"limit\\\":100,\\\"page\\\":1,\\\"userId\\\":36244617}}\"}
+    [self getCollectDetail:nil];
 
-    NSDictionary *header = @{@"platformId": @"mac",
-                             @"remoteIp": @"192.168.31.103",
-                             @"callId": @(1612607663014),
-                             @"sign": @"1207c400aa14dbc0be48a9276a5a392f",
-                             @"appId": @"200",
-                             @"deviceId":@"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7",
-                             @"accessToken": @"056688b9a35dfd32fc1cb031461f353e943i21",
-                             @"openId": @(36244617),
-                             @"network":@(1),
-                             @"appVersion":@(3010300),
-                             @"resolution":@"1178*704",
-                             @"utdid":@"33128a802abc96c7c180a6079fbb9a4317c888bcf2b5b2c2a4d3151acc76f6b7"};
-    
-    NSDictionary *model = @{@"limit":@(100),
-                            @"page":@(1),
-                            @"userId":@(36244617)};
-    
-    NSString *request = @{@"header":header,
-                          @"model":model}.toJsonString;
-    
-    
-    NSDictionary *request_dic = @{@"requestStr":request};
-    [self sendRequestWithAPI:nil cookies:nil requestDic:request_dic];
     
 }
+
+
+
+- (void)getCollectDetail:(NSString *)collectID
+{
+
+    NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+ 
+    /* Create session, and optionally set a NSURLSessionDelegate. */
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+
+    /* Create the Request:
+       Request (GET https://acs.m.xiami.com/h5/mtop.alimusic.recommend.songservice.getdailysongs/1.0/)
+     */
+
+    NSURL* URL = [NSURL URLWithString:@"https://acs.m.xiami.com/h5/mtop.alimusic.music.list.collectservice.getcollectdetail/1.0/"];
+    
+    
+//    'data' => array(
+//                 'listId'     => $id,
+//                 'isFullTags' => false,
+//                 'pagingVO'   => array(
+//                     'page'     => 1,
+//                     'pageSize' => 1000,
+//                 ),
+//             ),
+//             'r' => 'mtop.alimusic.music.list.collectservice.getcollectdetail',
+    NSDictionary *head = @{@"platformId":@"mac"};
+    NSDictionary *model = @{@"listId":@"1325571090",
+                             @"isFullTags":@(0),
+                             @"pagingVO":@{@"page":@(1),
+                                           @"pageSize":@(100)
+                             }};
+    
+    
+    NSString *requestString = @{@"header": head,
+                                 @"model": model}.toJsonString;
+    NSDictionary *data = @{@"requestStr":requestString};
+    
+    NSString *t = @"1612697020076";
+    
+    NSString *tk = @"2bef48f342a0c97192f2b5fe99cdd191";
+    NSString *appkey = @"12574478";
+    
+    NSString *dataString = data.toJsonString;
+    
+    NSString *sigin = [self hMacMD5String:[NSString stringWithFormat:@"%@&%@&%@&%@",tk,t,appkey,data]];
+    
+    NSDictionary* URLParams = @{
+        @"appKey": appkey,
+        @"t": t,
+        @"dataType": @"json",
+        @"data": dataString,
+        @"api": @"mtop.alimusic.music.list.collectservice.getcollectdetail",
+        @"v": @"1.0",
+        @"type": @"originaljson",
+        @"sign": sigin
+    };
+    
+    URL = NSURLByAppendingQueryParameters(URL, URLParams);
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+    request.HTTPMethod = @"GET";
+
+    // Headers
+    [request addValue:@"_m_h5_tk=2bef48f342a0c97192f2b5fe99cdd191_1612707733875;_m_h5_tk_enc=dac104e559a91ebdd8f43810125c62d1" forHTTPHeaderField:@"Cookie"];
+    [request addValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+
+    // Form URL-Encoded Body
+
+    NSDictionary* bodyParameters = @{
+    };
+    request.HTTPBody = [NSStringFromQueryParameters(bodyParameters) dataUsingEncoding:NSUTF8StringEncoding];
+
+    /* Start a new Task */
+    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            // Success
+            NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+            
+            NSString *resStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"%@",resStr);
+        }
+        else {
+            // Failure
+            NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+        }
+    }];
+    [task resume];
+    [session finishTasksAndInvalidate];
+}
+
 
 - (void)injected
 {
