@@ -12,6 +12,7 @@
 #import "NSDictionary+AixCategory.h"
 #import "NSArray+AixCategory.h"
 #import "SongDownloader.h"
+#import "NSString+AixCategory.h"
 
 @interface GenresWebController ()<UIWebViewDelegate>
 
@@ -23,7 +24,13 @@
 
 @property (nonatomic, strong) UIButton *recommendedBtn;
 
+
 @property (nonatomic, strong) PicDownloader *logoPicDownloader;
+@property (nonatomic, strong) PicDownloader *authorAvatarDownloader;
+//lyricInfo
+@property (nonatomic, strong) LyricDownloader *lrcDownloader;
+
+@property (nonatomic, copy) void(^collectsDownloadCompletion)(void);
 
 @end
 
@@ -47,11 +54,13 @@
     [self.view addSubview:_recommendedBtn];
     
     self.logoPicDownloader = [[PicDownloader alloc] init];
+    self.lrcDownloader = [[LyricDownloader alloc] init];
+    self.authorAvatarDownloader = [[PicDownloader alloc] init];
 }
 
 - (void)recommendBtnTapped {
     
-    [self requestRecommendCollects:1];
+    [self requestRecommendCollectWithTag:@"国语" page:1];
     
 }
 
@@ -90,9 +99,16 @@
 //
 //}
 
-- (void)requestRecommendCollects:(int )page
+- (void)requestRecommendCollectWithTag:(NSString *)tag page:(int)page
 {
-    NSDictionary *model = @{@"key":@"法语",
+    
+    if(page > 1){
+        NSLog(@"===============");
+        NSLog(@"100张歌单下载完成");
+        return;
+    }
+    
+    NSDictionary *model = @{@"key":tag,
                             @"limit":@(100),
                             @"order":@"recommend",
                             @"page":@(page)};
@@ -113,7 +129,12 @@
         }
         
         [weakSelf backupCollectsInfo:collects
-                             atIndex:0];
+                             atIndex:0 key:tag];
+        
+        weakSelf.collectsDownloadCompletion = ^{
+            int nextPage = page + 1;
+            [weakSelf requestRecommendCollectWithTag:tag page:nextPage];
+        };
         
     }
         
@@ -127,12 +148,17 @@
 }
 
 
-- (void)backupCollectsInfo:(NSArray *)collects atIndex:(NSInteger)index {
+- (void)backupCollectsInfo:(NSArray *)collects atIndex:(NSInteger)index key:(NSString *)key
+{
     
     __weak typeof(self) weakSelf = self;
     
     if (index >= collects.count) {
         NSLog(@"%lu个歌单信息保存完毕", (unsigned long)collects.count);
+        if (_collectsDownloadCompletion) {
+            _collectsDownloadCompletion();
+        }
+        
         return;
     }
     
@@ -141,7 +167,7 @@
     
     NSDictionary *model = @{@"listId": listid,
                             @"isFullTags": [NSNumber numberWithBool:YES],
-                            @"pagingVO":@{@"pageSize": @(100),
+                            @"pagingVO":@{@"pageSize": @(1000),
                                           @"page": @(1)}};
     
     [self sendRequestWithAPI:@"mtop.alimusic.music.list.collectservice.getcollectdetail" model:model success:^(NSDictionary *response) {
@@ -150,15 +176,15 @@
         NSDictionary *data = [[response x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
         
         NSDictionary *detail = [data x_dictionaryValueForKey:@"collectDetail"];
-        //ignore empty play list
         NSArray *songs = [detail x_arrayValueForKey:@"songs"];
         
-        if (songs.count == 0 || songs.count < 3 ) {
-            
+        int totalSongs = [detail x_numberForKey:@"songCount"].intValue;
+        
+        //ignore empty play list
+        if (songs.count < 3 ) {
             NSLog(@"歌曲数太少，备份下一个歌单");
-            
             NSInteger next = index + 1;
-            [weakSelf backupCollectsInfo:collects atIndex:next];
+            [weakSelf backupCollectsInfo:collects atIndex:next key:key];
             
         }else{
             
@@ -169,17 +195,32 @@
             NSString *playlistid = [detail x_stringValueForKey:@"listId"];
             if ([playlistid isEqualToString:listid]) {
                 
+                
+//                ==save play list json
                 NSString *listFileName = [NSString stringWithFormat:@"%@.json",playlistid];
                 
-                NSString *listRootPath = @"/Users/liuhongnian/Desktop/待处理歌单/Recommend";
+                NSString *listRootPath = [@"/Users/liuhongnian/Desktop/待处理歌单" stringByAppendingPathComponent:key];
+                
+                
                 NSString *JSONPath = [listRootPath stringByAppendingPathComponent:listFileName];
+                
+                if (![NSFileManager.defaultManager fileExistsAtPath:listRootPath]) {
+                   BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:listRootPath withIntermediateDirectories:YES attributes:nil error:NULL];
+                    NSAssert(created, @"歌单baocun 文件夹创建失败");
+                }
                 
                 BOOL saveCellectDetailSuccess = [data writeToFile:JSONPath
                                                        atomically:YES];
                 if (!saveCellectDetailSuccess) {
                     NSLog(@"保存歌单详情json 文件失败");
-                }else{
-                    NSLog(@"第%ld个歌单success",index + 1);
+                }
+                
+                
+                
+                NSLog(@"第%ld个歌单success",index + 1);
+                {
+                    
+                    
                     //downloader collect logo pic
                     NSString *logoUrl = [detail x_stringValueForKey:@"collectLogoLarge"];
                     
@@ -199,15 +240,72 @@
                                         }];
                 }
                 
-                if (songs.count > 100) {
-                    NSLog(@"捞到大鱼😆");
+                
+                
+                
+                if (totalSongs > 100) {
+                    NSLog(@"抓到一条大鱼 哈哈🐟");
+                }
+
+                //保存创建者头像
+                NSString *authorUrl = [detail x_stringValueForKey:@"authorAvatar"];
+                
+                NSString *authorSavePath = [listRootPath stringByAppendingPathComponent:@"image/authorAvatar"];
+                
+                if (![NSFileManager.defaultManager fileExistsAtPath:authorSavePath]) {
+                    
+                   BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:authorSavePath withIntermediateDirectories:YES attributes:nil error:NULL];
+                    NSAssert(created, @"头像文件夹创建失败");
                 }
                 
-                //download collect logo
+                NSString *uid = [detail x_stringValueForKey:@"userId"];
+                NSString *authorPicName = [NSString stringWithFormat:@"authorAvatar_%@",uid];
+                
+                [weakSelf.authorAvatarDownloader downloadWithURL:authorUrl localPath:authorSavePath picName:authorPicName success:^{
+                                        
+                                    } failure:^(NSError * _Nonnull error) {
+                                        NSLog(@"头像：%@ 下载失败",uid);
+                                    }];
+                
+                
+                
+                
+                //lrc file downloader
+//                if (songs.count < 100) {
+//                    
+//                    for (NSDictionary *songObj in songs)
+//                    {
+//                        
+//                        NSString *lyricFileURL = [[songObj x_dictionaryValueForKey:@"lyricInfo"] x_stringValueForKey:@"lyricFile"];
+//                        
+//                        if (lyricFileURL.isNotEmpty) {
+//                            
+//                            NSString *lrcSavePath = @"/Users/liuhongnian/Desktop/lrcFile";
+//                            
+//                            if (![NSFileManager.defaultManager fileExistsAtPath:lrcSavePath]) {
+//                                
+//                               BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:lrcSavePath withIntermediateDirectories:YES attributes:nil error:NULL];
+//                                NSAssert(created, @"lrc file 夹创建失败");
+//                            }
+//                            
+//                            NSString *lrcType = [lyricFileURL pathExtension];
+//                            NSString *song_id = [songObj x_stringValueForKey:@"songId"];
+//                            NSString *lrcFileName = [NSString stringWithFormat:@"lrc_%@.%@",song_id,lrcType];
+//                            
+//                            NSString *lrcDownloadPath = lrcSavePath;
+//                            [weakSelf.lrcDownloader downloadLyricFileWithURL:lyricFileURL localPath:lrcDownloadPath lrcFileName:lrcFileName success:^{
+//                                                        
+//                                                    } failure:^(NSError * _Nonnull error) {
+//                                                        
+//                                                        NSLog(@"lrc file download failred");
+//                                                    }];
+//                        }
+//                        
+//                    }
+//                }
                 
                 NSInteger nextCollectIndex = index + 1;
-                [self backupCollectsInfo:collects
-                                 atIndex:nextCollectIndex];
+                [self backupCollectsInfo:collects atIndex:nextCollectIndex key:key];
                 
             }
 
@@ -244,8 +342,8 @@
     NSURL* URL = [NSURL URLWithString:apiPath];
     
     //sigin
-    NSString *_m_h5_tk = @"a0d67db9d417d6bcf2a864d2b9a98b8d_1612781214477";
-    NSString *_m_h5_tk_enc = @"f6e6c30db060f1d78e5ab10860cf1e9e";
+    NSString *_m_h5_tk = @"c95259d5941b4bd6e6f979683e2b16ea_1612810529406";
+    NSString *_m_h5_tk_enc = @"ac6d747e8e586ecabd25fdad4662852b";
     
     NSString *token = [_m_h5_tk componentsSeparatedByString:@"_"].firstObject;
     NSString *t = @"1612763225000";
@@ -291,7 +389,9 @@
                 success(json);
                 
             }else {
-                
+                if ([ret isEqualToString:@"FAIL_SYS_TOKEN_EXOIRED::令牌过期"]) {
+                    NSLog(@"fail sys token");
+                }
                 NSLog(@"请求%@失败:%@",api, error);
                 failured(nil);
             }
@@ -396,8 +496,7 @@
 
 - (void)injected
 {
-    [self requestRecommendCollects:1];
-    
+//    [self requestRecommendCollectWithTag:@"思念" page:1];
 }
 
 

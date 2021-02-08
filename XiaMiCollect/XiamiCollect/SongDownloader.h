@@ -41,4 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface LyricDownloader : NSObject
+
+- (void)downloadLyricFileWithURL:(NSString *)lrcURL
+                       localPath:(NSString *)localPath
+                     lrcFileName:(NSString *)lrcName success:(void(^)(void))completion
+                         failure:(void(^) (NSError *error))downloadFailed;
+
+@end
+
 NS_ASSUME_NONNULL_END

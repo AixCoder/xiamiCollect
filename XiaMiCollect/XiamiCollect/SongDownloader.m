@@ -118,7 +118,8 @@
             type = @"gif";
         }else  {
             NSLog(@"下载图片格式---不支持");
-            NSAssert(false, @"下载图片格式---不支持");
+//            NSAssert(false, @"下载图片格式---不支持");
+            NSLog(@"%@: image type",response.MIMEType);
             return [NSURL URLWithString:@""];
         }
         
@@ -126,6 +127,44 @@
         NSString *picPath = [localPath stringByAppendingPathComponent:fullPicName];
         
         return [NSURL fileURLWithPath:picPath];
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        
+        if (!error && filePath) {
+            if (completion) {
+                completion();
+            }
+        }else{
+            downloadFailed(error);
+        }
+    }];
+    [task resume];
+}
+
+@end
+
+
+@implementation LyricDownloader
+
+- (void)downloadLyricFileWithURL:(NSString *)lrcURL localPath:(NSString *)localPath lrcFileName:(NSString *)lrcName success:(void (^)(void))completion failure:(void (^)(NSError * _Nonnull))downloadFailed
+{
+    
+    AFHTTPSessionManager *httpManager = [AFHTTPSessionManager manager];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:lrcURL]];
+    
+    NSURLSessionDownloadTask *task = [httpManager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        
+        //下载到----本地路径
+//        NSString *sugName = response.suggestedFilename;
+//        NSString *type = @"";
+        
+        
+        NSString *lrcLocalPath = [localPath stringByAppendingPathComponent:lrcName];
+        
+        return [NSURL fileURLWithPath:lrcLocalPath];
         
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
         
