@@ -14,6 +14,8 @@
 #import "SongDownloader.h"
 #import "NSString+AixCategory.h"
 
+#import "SongDownloader.h"
+
 @interface GenresWebController ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -23,10 +25,13 @@
 @property (nonatomic , copy) void(^styleCollectCompletion)(void);
 
 @property (nonatomic, strong) UIButton *recommendedBtn;
+@property (nonatomic, strong) UIButton *hotButton;
 @property (nonatomic, strong) UIButton *downloadRecommendBtn;
 
 @property (nonatomic, strong) PicDownloader *logoPicDownloader;
 @property (nonatomic, strong) PicDownloader *authorAvatarDownloader;
+@property (nonatomic, strong) PicDownloader *albumPicDownloader;
+@property (nonatomic, strong) PicDownloader *artistPicDownloader;
 //lyricInfo
 @property (nonatomic, strong) LyricDownloader *lrcDownloader;
 
@@ -34,6 +39,24 @@
 @property (nonatomic, assign) NSInteger lrcDownloadIndex;
 
 @property (nonatomic, copy) void(^collectsDownloadCompletion)(void);
+
+@property (nonatomic, strong) UIButton *forYouBtn;
+@property (nonatomic, strong) UIButton *hotBtn;
+@property (nonatomic, strong) UIButton *dNewBtn;
+
+@property (nonatomic, strong) SongDownloader *_hotmp3Downloader;
+@property (nonatomic, strong) SongDownloader *mp3_newDownloader;
+@property (nonatomic, strong) SongDownloader *recommendMP3Downloader;
+
+@property (nonatomic, strong) NSMutableArray *hotCollects;
+@property (nonatomic, strong) NSMutableArray *recommendCollects;
+@property (nonatomic, strong) NSMutableArray *lastCollects;
+
+@property (nonatomic , copy) void(^recommendDownloadCompletion)(void);
+@property (nonatomic, copy) void(^hotDownloadCompletion)(void);
+@property (nonatomic, copy) void(^lastDownloadCompletion)(void);
+
+@property (nonatomic, strong) NSMutableArray *commentVoList;
 
 @end
 
@@ -48,6 +71,8 @@
     
     _cookieDic = [NSMutableDictionary dictionary];
     
+    _commentVoList = [NSMutableArray arrayWithCapacity:8000];
+    
     
     _recommendedBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 100, 60, 40)];
     [_recommendedBtn setTitle:@"recommend"
@@ -60,43 +85,49 @@
     
 //    _downloadRecommendBtn
     
+    _hotButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 100, 60, 40)];
+    [_hotButton setTitle:@"hot"
+                     forState:UIControlStateNormal];
+    [_hotButton setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
+    [_hotButton addTarget:self
+                        action:@selector(hotButtonTapped)
+              forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_hotButton];
+    
+    
+    
+    
+    
     self.logoPicDownloader = [[PicDownloader alloc] init];
     self.lrcDownloader = [[LyricDownloader alloc] init];
     self.authorAvatarDownloader = [[PicDownloader alloc] init];
     
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSString *rootPath = @"/Users/liuhongnian/Desktop/待处理歌单/AI推荐/commentLists";
-//    NSArray *fileDirectoryNames = [fileManager contentsOfDirectoryAtPath:rootPath
-//                                                                   error:NULL];
-//
-//
-//    NSString *jsonName;
-//    for (NSString *subFileName in [fileManager contentsOfDirectoryAtPath:rootPath error:NULL]) {
-//
-//        if ([subFileName hasSuffix:@".json"]) {
-//            jsonName = subFileName;
-//
-//            NSString *collectJSONPath = [rootPath stringByAppendingPathComponent:jsonName];
-//
-//            NSData *collectData = [fileManager contentsAtPath:collectJSONPath];
-//
-//
-//            NSDictionary *collectObj = [NSJSONSerialization JSONObjectWithData:collectData options:NSJSONReadingMutableContainers error:NULL];
-//
-//            NSMutableDictionary *collectMutable = [collectObj mutableCopy];
-//            NSArray *commentList = [collectMutable[@"data"][@"data"] x_arrayValueForKey:@"commentVOList"];
-//
-//            for (NSDictionary *obj in commentList) {
-//                //net easy list name
-//                NSString *comment = obj[@"message"];
-//
-//                if ([comment containsString:@"音乐是咖啡绝对的灵魂伴侣～"]) {
-//                    NSLog(@"yyeyeyye");
-//                }
-//
-//            }
-//        }
-//    }
+
+    
+    _albumPicDownloader = [[PicDownloader alloc] init];
+    _artistPicDownloader = [[PicDownloader alloc] init];
+    _recommendMP3Downloader = [[SongDownloader alloc] init];
+    _mp3_newDownloader = [[SongDownloader alloc] init];
+    __hotmp3Downloader = [[SongDownloader alloc] init];
+    
+    _recommendCollects = [NSMutableArray array];
+    _hotCollects = [NSMutableArray array];
+    _lastCollects = [NSMutableArray array];
+    
+    _downloadRecommendBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 300, 60, 40)];
+    [_downloadRecommendBtn setTitle:@"下载AI推荐歌单音乐"
+                     forState:UIControlStateNormal];
+    [_downloadRecommendBtn setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
+    [_downloadRecommendBtn addTarget:self
+                        action:@selector(foryouButtonTapped)
+              forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_downloadRecommendBtn];
+    
+}
+
+
+- (void)initCollects
+{
     
 }
 
@@ -125,19 +156,91 @@
     
     
     
-    [self requestRecommendCollectWithTag:@"英伦"
-                                    page:2];
+//    [self requestRecommendCollectWithTag:@"英伦"
+//                                    page:2];
+////
+//    [self requestRecommendCollectWithTag:@"舞曲"
+//                                    page:2];
 //
-    [self requestRecommendCollectWithTag:@"舞曲"
-                                    page:2];
-
-    [self requestRecommendCollectWithTag:@"后摇"
-                                    page:2];
+//    [self requestRecommendCollectWithTag:@"后摇"
+//                                    page:2];
 
 
+//    [self requestRecommendCollectWithTag:@"" page:1];
     
 //    [self requestRecommendCollectWithTag:@"数摇" page:2];
     
+//    1325571090
+    [self getCommentList:@"1325571090" page:1];
+    
+}
+
+
+- (void)getCommentList:(NSString *)playlistID page:(int )page {
+    
+    if (page >= 6) {
+        
+        //全部评论爬取完毕
+        NSString *commitFileName = [NSString stringWithFormat:@"comment_%@.json",@"虾米编辑部电台 | 献上最后的挚爱曲"];
+        
+        NSString *commitlistPath = @"/Users/liuhongnian/Desktop";
+        
+        NSString *commentJSONPath = [commitlistPath stringByAppendingPathComponent:commitFileName];
+        
+        if (![NSFileManager.defaultManager fileExistsAtPath:commitlistPath]) {
+            BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:commitlistPath withIntermediateDirectories:YES attributes:nil error:NULL];
+            NSAssert(created, @"歌单pinglun baocun 文件夹创建失败");
+        }
+        
+        NSData *commentData = [NSJSONSerialization dataWithJSONObject:_commentVoList
+                                                              options:NSJSONWritingPrettyPrinted
+                                                                error:nil];
+        
+        BOOL savecommentDetailSuccess = [commentData writeToFile:commentJSONPath
+                                                      atomically:YES];
+        if (!savecommentDetailSuccess) {
+            NSLog(@"保存歌单pinglun json 文件失败");
+        }
+        NSLog(@"评论保存完毕: :%lu 条评论",(unsigned long)_commentVoList.count);
+        return;
+        
+    }
+    
+    
+    //get comment list
+    NSDictionary *model = @{@"objectId": playlistID,
+                            @"objectType":@"collect",
+                            @"pagingVO":@{@"page":@(page),
+                                          @"pageSize":@(1000)
+                            }
+    };
+    
+        __weak typeof(self) weakSelf = self;
+    NSString *api = @"mtop.alimusic.social.commentservice.getcommentlist";
+    [self sendRequestWithAPI:api header:nil model:model success:^(NSDictionary *resultData) {
+        
+        NSDictionary *data = [[resultData x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
+        
+        NSArray *commentlist = [data x_arrayValueForKey:@"commentVOList"];
+        if (commentlist == 0) {
+            NSLog(@"评论数异常");
+        }
+        [weakSelf.commentVoList addObject:commentlist];
+        
+        [weakSelf getCommentList:playlistID page:page + 1];
+        
+    } failure:^(NSError *error) {
+                        
+        NSLog(@"get commentlist: %@ failured");
+        
+    }];
+
+}
+
+
+- (void)hotButtonTapped {
+    
+    [self requestHotCollestsWithTag:@"" page:1];
 }
 
 //- (void)requestHotCollects:(int)page {
@@ -175,10 +278,63 @@
 //
 //}
 
+- (void)requestHotCollestsWithTag:(NSString *)tag page:(int)page {
+    
+    if(page > 20){
+        NSLog(@"===============");
+        NSLog(@"%@---1000张歌单下载完成",tag);
+        return;
+    }
+    
+    NSString *api = @"mtop.alimusic.music.list.collectservice.getcollects";
+    
+    //虾米--最热
+    NSDictionary *header = @{@"platformId":@"mac",
+//                             @"openId":@"36244617",
+//                             @"accessToken":@"3680110e80969af61e297b841d7c31e8943i21",
+                             @"network":@(1)
+    };
+    
+//    {\"key\":\"\",\"limit\":50,\"order\":\"hot\",\"page\":1}
+    NSDictionary *model = @{@"key":tag,
+                            @"limit":@(50),
+                            @"order":@"hot",
+                            @"page":@(page)};
+    
+    
+    __weak typeof(self) weakSelf = self;
+    [self sendRequestWithAPI:api header:header
+                       model:model
+                     success:^(NSDictionary *resultData) {
+        
+        NSDictionary *data = [[resultData x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
+        
+        NSArray *collects = [data x_arrayValueForKey:@"collects"];
+        
+        if (collects.count == 0) {
+            NSLog(@"热门歌单集合为空---不备份");
+        }else{
+    
+            
+            weakSelf.collectsDownloadCompletion = ^{
+                int nextPage = page + 1;
+            };
+        }
+        
+    }
+                     failure:^(NSError *error) {
+
+        NSLog(@"获取第%d页推荐歌单失败------%@",page,error);
+        
+    }];
+    
+    
+}
+
 - (void)requestRecommendCollectWithTag:(NSString *)tag page:(int)page
 {
     
-    if(page > 10){
+    if(page > 20){
         NSLog(@"===============");
         NSLog(@"%@---1000张歌单下载完成",tag);
         return;
@@ -189,13 +345,13 @@
     
     //虾米AI最后推荐
     NSDictionary *header = @{@"platformId":@"mac",
-//                             @"openId":@"36244617",
-//                             @"accessToken":@"3680110e80969af61e297b841d7c31e8943i21",
+                             @"openId":@"36244617",
+                             @"accessToken":@"056688b9a35dfd32fc1cb031461f353e943i21",
                              @"network":@(1)
     };
     NSDictionary *model = @{@"key":tag,
-                            @"limit":@(100),
-                            @"order":@"recommend",
+                            @"limit":@(50),
+                            @"order":@"new",
                             @"page":@(page)};
     
     
@@ -212,9 +368,6 @@
             NSLog(@"热门歌单集合为空---不备份");
         }else{
             
-            [weakSelf backupCollectsInfo:collects
-                                 atIndex:0
-                                     key:tag];
             
             weakSelf.collectsDownloadCompletion = ^{
                 int nextPage = page + 1;
@@ -230,210 +383,6 @@
         
     }];
     
-    
-}
-
-
-- (void)backupCollectsInfo:(NSArray *)collects atIndex:(NSInteger)index key:(NSString *)key
-{
-    
-    __weak typeof(self) weakSelf = self;
-    
-    if (index >= collects.count) {
-        NSLog(@"%lu个歌单信息保存完毕", (unsigned long)collects.count);
-        if (_collectsDownloadCompletion) {
-            _collectsDownloadCompletion();
-        }
-        return;
-    }
-    
-    
-    //request collect detail
-    NSString *listid = [[collects objectAtIndex:index] x_stringValueForKey:@"listId"];
-    
-    NSDictionary *model = @{@"listId": listid,
-                            @"isFullTags": [NSNumber numberWithBool:YES],
-                            @"pagingVO":@{@"pageSize": @(1000),
-                                          @"page": @(1)}};
-    
-    [self sendRequestWithAPI:@"mtop.alimusic.music.list.collectservice.getcollectdetail" header:nil model:model success:^(NSDictionary *response) {
-            
-        //save collect detail info to json file
-        NSDictionary *data = [[response x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
-        
-        NSDictionary *detail = [data x_dictionaryValueForKey:@"collectDetail"];
-        NSArray *songs = [detail x_arrayValueForKey:@"songs"];
-        
-        int totalSongs = [detail x_numberForKey:@"songCount"].intValue;
-        
-        //ignore empty play list
-        if (songs.count < 3 ) {
-            NSLog(@"歌曲数太少，备份下一个歌单");
-            NSInteger next = index + 1;
-            [weakSelf backupCollectsInfo:collects atIndex:next key:key];
-            
-        }else{
-            
-            NSData *data = [NSJSONSerialization dataWithJSONObject:response
-                                                           options:NSJSONWritingPrettyPrinted
-                                                             error:nil];
-            
-            NSString *playlistid = [detail x_stringValueForKey:@"listId"];
-            if ([playlistid isEqualToString:listid]) {
-                
-#pragma mark 保存歌单详情json
-//                ==save play list json
-                NSString *listFileName = [NSString stringWithFormat:@"%@.json",playlistid];
-                NSString *listRootPath = [@"/Users/liuhongnian/Desktop/待处理歌单" stringByAppendingPathComponent:key];
-                
-                
-                NSString *JSONPath = [listRootPath stringByAppendingPathComponent:listFileName];
-                
-                if (![NSFileManager.defaultManager fileExistsAtPath:listRootPath]) {
-                   BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:listRootPath withIntermediateDirectories:YES attributes:nil error:NULL];
-                    NSAssert(created, @"歌单baocun 文件夹创建失败");
-                }
-                
-                BOOL saveCellectDetailSuccess = [data writeToFile:JSONPath
-                                                       atomically:YES];
-                if (!saveCellectDetailSuccess) {
-                    NSLog(@"保存歌单详情json 文件失败");
-                }
-                
-                
-#pragma mark save collect logo pic
-                {
-                    
-                    //downloader collect logo pic
-                    NSString *logoUrl = [detail x_stringValueForKey:@"collectLogoLarge"];
-                    if ([logoUrl isNotEmpty]) {
-                        
-                        NSString *collectSavePath = [listRootPath stringByAppendingPathComponent:@"image/collectCover"];
-                        
-                        if (![NSFileManager.defaultManager fileExistsAtPath:collectSavePath]) {
-                           BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:collectSavePath withIntermediateDirectories:YES attributes:nil error:NULL];
-                            NSAssert(created, @"歌单封面文件夹创建失败");
-                        }
-                        
-                        NSString *logoFileName = [NSString stringWithFormat:@"collectLogoL_%@",playlistid];
-                        
-                        [weakSelf.logoPicDownloader downloadWithURL:logoUrl localPath:collectSavePath picName:logoFileName success:^{
-                            
-                                            } failure:^(NSError * _Nonnull error) {
-                                                NSLog(@"下载歌单%@封面失败啦",playlistid);
-                                            }];
-                    }else{
-                        NSLog(@"👥头像为空");
-                    }
-                    
-
-                }
-                
-                
-//                if (totalSongs > 100) {
-//                    NSLog(@"抓到一条大鱼 哈哈🐟");
-//                }
-
-#pragma mark save author avatar view pic
-                //保存创建者头像
-                NSString *authorUrl = [detail x_stringValueForKey:@"authorAvatar"];
-                
-                NSString *authorSavePath = [listRootPath stringByAppendingPathComponent:@"image/authorAvatar"];
-                
-                if (![NSFileManager.defaultManager fileExistsAtPath:authorSavePath]) {
-                    
-                   BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:authorSavePath withIntermediateDirectories:YES attributes:nil error:NULL];
-                    NSAssert(created, @"头像文件夹创建失败");
-                }
-                
-                NSString *uid = [detail x_stringValueForKey:@"userId"];
-                NSString *authorPicName = [NSString stringWithFormat:@"authorAvatar_%@",uid];
-                
-                [weakSelf.authorAvatarDownloader downloadWithURL:authorUrl localPath:authorSavePath picName:authorPicName success:^{
-                                        
-                                    } failure:^(NSError * _Nonnull error) {
-                                        NSLog(@"头像：%@ 下载失败",uid);
-                                    }];
-                
-                        
-#pragma mark download lrc file
-                BOOL needLRC = NO;
-                if (needLRC) {
-                    
-                    for (NSDictionary *songObj in songs)
-                    {
-                        
-                        NSDictionary *lrcInfo = songObj[@"lyricInfo"];
-                        if (lrcInfo) {
-                            NSString *lyricFileURL =lrcInfo[@"lyricFile"];
-                            if (lyricFileURL != nil || [lyricFileURL isNotEmpty]) {
-                                [weakSelf addLRCFileToDownloadQuen:songObj];
-                            }
-                        }
-                        
-                    }
-                }
-     
-      
-//                {"requestStr":"{\"header\":{\"platformId\":\"mac\",\"remoteIp\":\"192.168.2.1\",\"callId\":1612750587623,\"sign\":\"9542dca3b383caaa0075643e99d7848d\",\"appId\":200,\"deviceId\":\"b2dd9481a676a0449898aa1c3e151d0fd60e59290db44584961a2b67929fcc52\",\"accessToken\":\"3680110e80969af61e297b841d7c31e8943i21\",\"openId\":36244617,\"network\":1,\"appVersion\":3010300,\"resolution\":\"1178*704\",\"utdid\":\"b2dd9481a676a0449898aa1c3e151d0fd60e59290db44584961a2b67929fcc52\"},\"model\":{\"objectId\":7299,\"objectType\":\"artist\",\"pagingVO\":{\"page\":2,\"pageSize\":20}}}"}
-                //getcommentlist
-                
-//                {\"objectId\":244377512,\"objectType\":\"collect\",\"pagingVO\":{\"page\":1,\"pageSize\":20}}
-            
-                
-                NSDictionary *model = @{@"objectId": playlistid,
-                                        @"objectType":@"collect",
-                                        @"pagingVO":@{@"page":@(1),
-                                                      @"pageSize":@(100)
-                                        }
-                };
-                NSString *api = @"mtop.alimusic.social.commentservice.getcommentlist";
-                [weakSelf sendRequestWithAPI:api header:nil model:model success:^(NSDictionary *resultData) {
-                    
-
-                    NSString *commitFileName = [NSString stringWithFormat:@"comment_%@.json",playlistid];
-                    
-                    NSString *commitlistPath = [listRootPath stringByAppendingPathComponent:@"commentLists"];
-                    
-                    NSString *commentJSONPath = [commitlistPath stringByAppendingPathComponent:commitFileName];
-                    
-                    if (![NSFileManager.defaultManager fileExistsAtPath:commitlistPath]) {
-                        BOOL created = [NSFileManager.defaultManager createDirectoryAtPath:commitlistPath withIntermediateDirectories:YES attributes:nil error:NULL];
-                        NSAssert(created, @"歌单pinglun baocun 文件夹创建失败");
-                    }
-                    
-                    NSData *commentData = [NSJSONSerialization dataWithJSONObject:resultData
-                                                                          options:NSJSONWritingPrettyPrinted
-                                                                            error:nil];
-                    
-                    BOOL savecommentDetailSuccess = [commentData writeToFile:commentJSONPath
-                                                                  atomically:YES];
-                    if (!savecommentDetailSuccess) {
-                        NSLog(@"保存歌单pinglun json 文件失败");
-                    }
-                    
-                } failure:^(NSError *error) {
-                                    
-                    NSLog(@"get commentlist: %@ failured",playlistid);
-                }];
-   
-                
-                NSInteger nextCollectIndex = index + 1;
-                
-                [self backupCollectsInfo:collects
-                                 atIndex:nextCollectIndex
-                                     key:key];
-                
-            }
-
-        }
-        
-        
-
-        } failure:^(NSError *error) {
-            
-            NSLog(@"歌单详情获取失败: %@",error);
-        }];
     
 }
 
@@ -460,8 +409,8 @@
     
     
     //sigin --------request par created
-    NSString *_m_h5_tk = @"80c24681934ea86bfc645a703e64f8f5_1612867710275";
-    NSString *_m_h5_tk_enc = @"705c0c1fbadfbf5b4a9eb31b6bfd2974";
+    NSString *_m_h5_tk = @"234b4bf081e83854e2ce8818c67e8a98_1612941466412";
+    NSString *_m_h5_tk_enc = @"85d168aa6f2e25cac48974fe34d6f920";
     
     NSString *token = [_m_h5_tk componentsSeparatedByString:@"_"].firstObject;
     NSString *t = @"1612763225000";
@@ -493,7 +442,7 @@
 
     
     // Headers cookie values
-    NSString *cookieString = [NSString stringWithFormat:@"xmgid=2cf10f00-375a-41b9-bdd9-ae42e9c7e10c;xm_oauth_state=d2865f94c017103a45b3b297e0924fc1;_m_h5_tk=%@;_m_h5_tk_enc=%@", _m_h5_tk, _m_h5_tk_enc];
+    NSString *cookieString = [NSString stringWithFormat:@"xmgid=7515f88b-9f92-4136-a94b-8a9dc16f3df9;xm_oauth_state=d2865f94c017103a45b3b297e0924fc1;_m_h5_tk=%@;_m_h5_tk_enc=%@", _m_h5_tk, _m_h5_tk_enc];
     [request addValue:cookieString forHTTPHeaderField:@"Cookie"];
 
     
@@ -620,8 +569,8 @@
 
 - (void)injected
 {
-    [self requestRecommendCollectWithTag:@"失恋"
-                                    page:2];
+//    [self requestRecommendCollectWithTag:@"失恋"
+//                                    page:2];
 }
 
 
@@ -1910,4 +1859,290 @@ static NSURL* NSURLByAppendingQueryParameters(NSURL* URL, NSDictionary* queryPar
     
     return result;
 }
+
+
+
+#pragma mark download For you Collects
+- (void)foryouButtonTapped {
+    
+    //for 找出所有ai推荐歌单
+    
+    NSString *collectRootPath = @"/Users/liuhongnian/Desktop/待处理歌单/AI推荐";
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSArray *fileNames = [fileManager contentsOfDirectoryAtPath:collectRootPath error:NULL];
+    
+    [_recommendCollects removeAllObjects];
+    for (NSString *subFileName in fileNames) {
+        
+        NSString *collectJsonFile;
+        if ([subFileName containsString:@".json"]) {
+            collectJsonFile = subFileName;
+        }
+        
+        if (collectJsonFile != nil && [collectJsonFile isNotEmpty]) {
+            
+            //歌单
+            NSString *collectJSONPath = [collectRootPath stringByAppendingPathComponent:collectJsonFile];
+            
+            NSData *collectData = [fileManager contentsAtPath:collectJSONPath];
+            
+            NSDictionary *collectObj;
+            collectObj = [NSJSONSerialization JSONObjectWithData:collectData options:NSJSONReadingMutableContainers error:NULL];
+            
+            if (collectObj.allKeys.count > 0) {
+//                排除已经下载过的
+                NSDictionary *data = [[collectObj x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
+                NSDictionary *collectDetail = [data x_dictionaryValueForKey:@"collectDetail"];
+                
+                NSString *name = [collectDetail x_stringValueForKey:@"collectName"];
+                NSString *downloaderPath = @"/Users/liuhongnian/Desktop/已下载的歌单";
+                
+                NSString *floderPath = [downloaderPath stringByAppendingPathComponent:name];
+                if (![[NSFileManager defaultManager] fileExistsAtPath:floderPath]) {
+                    [self.recommendCollects addObject:collectObj];
+                }
+                
+            }
+            
+        }
+        
+    
+    }
+
+    if (self.recommendCollects.count <=0) {
+        NSLog(@"空文件夹，没有找到歌单");
+    }else{
+        [self downloadForYouCollects:_recommendCollects
+                             atIndex:0];
+    }
+}
+
+- (void)downloadForYouCollects:(NSArray *)collects
+                       atIndex:(NSInteger )index {
+    
+    if (index >= collects.count) {
+        //completion
+        NSLog(@"歌曲下载完毕啦 ！！！");
+        return;
+    }
+    
+    NSDictionary *data = [[collects[index] x_dictionaryValueForKey:@"data"] x_dictionaryValueForKey:@"data"];
+    
+    NSDictionary *collectDetail = [data x_dictionaryValueForKey:@"collectDetail"];
+    
+    
+    NSString *collectName = [collectDetail x_stringValueForKey:@"collectName"];
+    NSString *downloadPath = [@"/Users/liuhongnian/Desktop/已下载的歌单" stringByAppendingPathComponent:collectName];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:downloadPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    
+    self.recommendDownloadCompletion = ^{
+        [weakSelf downloadForYouCollects:collects
+                                 atIndex:index + 1];
+    };
+    
+    NSArray *songsList = [collectDetail x_arrayValueForKey:@"songs"];
+    [self downloadSongList:songsList
+                    toPath:downloadPath
+                   atIndex:0];
+    
+
+    
+}
+
+- (void)downloadSongList:(NSArray *)songsList
+                  toPath:(NSString *)downloadPath
+                 atIndex:(NSInteger )index
+{
+    
+    if (index >= songsList.count) {
+        NSLog(@"歌单歌曲下载完毕");
+        if (_recommendDownloadCompletion) {
+            _recommendDownloadCompletion();
+        }
+        return;
+    }
+    
+    
+
+    NSDictionary *song = songsList[index];
+    NSArray *listenFiles = [song x_arrayValueForKey:@"listenFiles"];
+    if (listenFiles.count == 0) {
+        NSLog(@"没有歌曲下载链接 ----去下载下一首");
+        
+        [self downloadSongList:songsList
+                        toPath:downloadPath
+                       atIndex:index + 1];
+        
+    }else{
+        
+        NSString *songName;
+        songName = [song x_stringValueForKey:@"songName"];
+        
+        NSString *artist = [song x_stringValueForKey:@"artistName"];
+        
+        if (songName == nil || [songName isEmpty]) {
+            NSLog(@"错误：没有歌曲名称，你可让我如何是好");
+            [self downloadSongList:songsList
+                            toPath:downloadPath
+                           atIndex:index + 1];
+            return;
+        }
+
+        NSString *format;
+        NSString *songURL;
+        for (NSDictionary *listenSong in listenFiles) {
+            
+            NSString *quality = [listenSong x_stringValueForKey:@"quality"];
+//            if ([quality isEqualToString:@"s"]) {
+//                format = [listenSong x_stringValueForKey:@"format"];
+//                songURL = [listenSong x_stringValueForKey:@"listenFile"];
+//                break;
+//
+//            }else
+            NSString *songFormat = [listenSong x_stringValueForKey:@"format"];
+            if ([songFormat isEqualToString:@"m4a"] ) {
+                format = songFormat;
+                songURL = [listenSong x_stringValueForKey:@"listenFile"];
+
+                break;
+            }else if ([songFormat isEqualToString:@"mp3"] ) {
+                format = songFormat;
+                songURL = [listenSong x_stringValueForKey:@"listenFile"];
+                break;
+            }
+             
+            
+
+//            if ([quality isEqualToString:@"h"]){
+//                format = [listenSong x_stringValueForKey:@"format"];
+//                songURL = [listenSong x_stringValueForKey:@"listenFile"];
+//                break;
+//
+//            }else if([quality isEqualToString:@"f"]){
+//                format = [listenSong x_stringValueForKey:@"format"];
+//                songURL = [listenSong x_stringValueForKey:@"listenFile"];
+//                break;
+//            }else{
+//                format = [listenSong x_stringValueForKey:@"format"];
+//                songURL = [listenSong x_stringValueForKey:@"listenFile"];
+//                break;
+//            }
+        }
+        
+        if (format == nil) {
+            NSLog(@"错误：歌曲：%@ 未匹配到格式", songName);
+            NSInteger nextIndex = index + 1;
+            [self downloadSongList:songsList
+                            toPath:downloadPath
+                           atIndex:nextIndex];
+        }else{
+            
+            
+            if ([songName isNotEmpty] && [songURL isNotEmpty]) {
+                
+                NSString *mp3File = [NSString stringWithFormat:@"%@-%@.%@",songName,artist,format];
+                
+                    __weak typeof(self) weakSelf = self;
+                [_recommendMP3Downloader downloadSongWithURL:songURL savePath:downloadPath fileName:mp3File success:^{
+                    //download success
+                    NSInteger nextSongIndex = index + 1;
+                    [weakSelf downloadSongList:songsList toPath:downloadPath atIndex:nextSongIndex];
+                    
+                } failure:^(NSError * _Nonnull error) {
+                    
+                    NSLog(@"错误 下载歌曲:%@ 失败",songName);
+                    NSInteger nextSongIndex = index + 1;
+                    [weakSelf downloadSongList:songsList toPath:downloadPath atIndex:nextSongIndex];
+                    
+                }];
+                
+                
+                
+                
+                
+                NSDictionary *lrcInfo = song[@"lyricInfo"];
+                if (lrcInfo)
+                {
+                    NSString *lyricFileURL =lrcInfo[@"lyricFile"];
+                    if (lyricFileURL != nil || [lyricFileURL isNotEmpty]) {
+                        
+                        NSString *lrcType = [lyricFileURL pathExtension];
+                        NSString *song_id = [song x_stringValueForKey:@"songId"];
+                        NSString *lrcFileName = [NSString stringWithFormat:@"lrc_%@.%@",song_id,lrcType];
+                        
+                        NSString *lrcDownloadPath = @"/Users/liuhongnian/Desktop/歌词";
+                        __weak typeof(self) weakSelf = self;
+                        
+                        [weakSelf.lrcDownloader downloadLyricFileWithURL:lyricFileURL
+                                                               localPath:lrcDownloadPath
+                                                             lrcFileName:lrcFileName
+                                                                 success:^{
+                            
+                            
+                        } failure:^(NSError * _Nonnull error) {
+                            
+                            NSLog(@"lrc file download failred");
+                            
+                        }];
+
+                    }
+                }
+                
+                
+                NSString *albumurl = [song x_stringValueForKey:@"albumLogo"];
+                
+                NSString *song_id = [song x_stringValueForKey:@"songId"];
+//
+//
+                NSString *albumFile = [NSString stringWithFormat:@"album_%@",song_id];
+                NSString *albumDownloaderPath = @"/Users/liuhongnian/Desktop/image/album";
+                
+                
+                //album pic
+                [weakSelf.albumPicDownloader downloadWithURL:albumurl localPath:albumDownloaderPath picName:albumFile success:^{
+                    
+                } failure:^(NSError * _Nonnull error) {
+                    NSLog(@"下载歌曲专辑封面失败");
+                }];
+                
+                
+                
+                
+                NSString *artistId = [song x_stringValueForKey:@"artistId"];
+                NSString *artistLogoUrl = [song x_stringValueForKey:@"artistLogo"];
+                
+                NSString *artistDownloadPath = @"/Users/liuhongnian/Desktop/image/artist";
+                
+                NSString *artistFile = [NSString stringWithFormat:@"artistlogo_%@",artistId];
+                                
+                [weakSelf.artistPicDownloader downloadWithURL:artistLogoUrl
+                                                    localPath:artistDownloadPath picName:artistFile
+                                                      success:^{
+                    
+                    
+                    
+                } failure:^(NSError * _Nonnull error) {
+                    NSLog(@"下载艺人照封面失败");
+                }];
+
+            }else{
+                NSLog(@"未找到歌曲下载地址---下一首");
+                [self downloadSongList:songsList
+                                toPath:downloadPath
+                               atIndex:index + 1];
+            }
+               
+        }
+        
+                
+    }
+}
+
 @end

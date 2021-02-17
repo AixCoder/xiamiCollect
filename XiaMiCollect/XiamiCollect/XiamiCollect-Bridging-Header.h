@@ -7,6 +7,8 @@
 
 #import "PlaylistMatch.h"
 #import "GenresWebController.h"
+#import "PlaylistsViewController.h"
+
 
 #import "AFNetworking.h"
 

@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     let downloadButton = UIButton(type: .custom)
     let genresButton = UIButton(type: .custom)
     let favoriteButton = UIButton(type: .custom)
+    let playlistButton = UIButton(type: .custom)
     
     var downloadIndex = 0
     let collectURLS = ["https://music.xiami.com/resource/collect/v2/detail/1059958/3105065/1467078216?auth_key=1609999835-0-0-38723b29ae8ffaa9aaf958ddbbc629de",
@@ -72,6 +73,13 @@ class ViewController: UIViewController {
         favoriteButton.frame = CGRect.init(x: 200, y: 230, width: 100, height: 40)
         favoriteButton.addTarget(self, action: #selector(favoriteSongButtonTapped), for: .touchUpInside)
         view.addSubview(favoriteButton)
+        
+        
+        playlistButton.setTitle("playlists", for: .normal)
+        playlistButton.setTitleColor(.blue, for: .normal)
+        playlistButton.frame = CGRect.init(x: 200, y: 260, width: 100, height: 40)
+        playlistButton.addTarget(self, action: #selector(playlistBtnTapped), for: .touchUpInside)
+        view.addSubview(playlistButton)
     
     }
     
@@ -444,6 +452,21 @@ class ViewController: UIViewController {
         self.present(vc, animated: true) {
             
         }
+    }
+    
+    @objc func playlistBtnTapped() {
+        
+//        let jazzGenre = URL(string: "xiami://genre/5")
+//        UIApplication.shared.open(jazzGenre!, options: [:]) { (success) in
+//        }
+//        return
+        
+        let vc = PlaylistsViewController.init()
+        let navCtrl = UINavigationController.init(rootViewController: vc)
+        self.present(navCtrl, animated: true) {
+
+        }
+        
     }
 }
 

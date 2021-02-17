@@ -38,6 +38,9 @@
 		F679207425CC230B00C7CE9C /* AixDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F679204F25CC230A00C7CE9C /* AixDebugLog.m */; };
 		F679207525CC230B00C7CE9C /* CALayer+AixCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F679205425CC230B00C7CE9C /* CALayer+AixCategory.m */; };
 		F679207625CC230B00C7CE9C /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F679205925CC230B00C7CE9C /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F6A13B2A25D6218400FDC019 /* PlaylistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A13B2825D6218400FDC019 /* PlaylistsViewController.m */; };
+		F6A13B2B25D6218400FDC019 /* PlaylistsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6A13B2925D6218400FDC019 /* PlaylistsViewController.xib */; };
+		F6A13B3125D6B05C00FDC019 /* PlaylistsDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A13B3025D6B05C00FDC019 /* PlaylistsDownloader.m */; };
 		F6A5ABDC257F09F60069ED91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */; };
 		F6A5ABDE257F09F60069ED91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */; };
 		F6A5ABE0257F09F60069ED91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A5ABDF257F09F60069ED91 /* ViewController.swift */; };
@@ -144,6 +147,11 @@
 		F679205725CC230B00C7CE9C /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		F679205825CC230B00C7CE9C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		F679205925CC230B00C7CE9C /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		F6A13B2725D6218400FDC019 /* PlaylistsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaylistsViewController.h; sourceTree = "<group>"; };
+		F6A13B2825D6218400FDC019 /* PlaylistsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaylistsViewController.m; sourceTree = "<group>"; };
+		F6A13B2925D6218400FDC019 /* PlaylistsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistsViewController.xib; sourceTree = "<group>"; };
+		F6A13B2F25D6B05C00FDC019 /* PlaylistsDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaylistsDownloader.h; sourceTree = "<group>"; };
+		F6A13B3025D6B05C00FDC019 /* PlaylistsDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaylistsDownloader.m; sourceTree = "<group>"; };
 		F6A5ABD8257F09F60069ED91 /* XiamiCollect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XiamiCollect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A5ABDB257F09F60069ED91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6A5ABDD257F09F60069ED91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -366,6 +374,11 @@
 				F6A5AC10257F0B160069ED91 /* CollectRequest.m */,
 				F60B9B57258B668F00AAB167 /* SongDownloader.h */,
 				F60B9B58258B668F00AAB167 /* SongDownloader.m */,
+				F6A13B2725D6218400FDC019 /* PlaylistsViewController.h */,
+				F6A13B2825D6218400FDC019 /* PlaylistsViewController.m */,
+				F6A13B2F25D6B05C00FDC019 /* PlaylistsDownloader.h */,
+				F6A13B3025D6B05C00FDC019 /* PlaylistsDownloader.m */,
+				F6A13B2925D6218400FDC019 /* PlaylistsViewController.xib */,
 				F6D5340525CBD73000ABB513 /* Genres.json */,
 				F679201625CC230A00C7CE9C /* AixCategorys */,
 				F6D5339D25CB89FC00ABB513 /* Genres */,
@@ -547,6 +560,7 @@
 				F6D5340625CBD73000ABB513 /* Genres.json in Resources */,
 				F6A5ABE3257F09F60069ED91 /* Main.storyboard in Resources */,
 				F6C7F23F25CEBBC1007FABA8 /* FavoriteSongsVC.xib in Resources */,
+				F6A13B2B25D6218400FDC019 /* PlaylistsViewController.xib in Resources */,
 				F670C61325A549720068CA33 /* collectResult.json in Resources */,
 				F6DE7D8D25CF1D5B00DCEF9F /* collectString.json in Resources */,
 			);
@@ -602,9 +616,11 @@
 				F679207325CC230B00C7CE9C /* NSString+AixCategory.m in Sources */,
 				F679206625CC230B00C7CE9C /* UIView+AixCategory.m in Sources */,
 				F679205E25CC230B00C7CE9C /* UIImage+AixCategory.m in Sources */,
+				F6A13B3125D6B05C00FDC019 /* PlaylistsDownloader.m in Sources */,
 				F679205A25CC230B00C7CE9C /* UIGestureRecognizer+AixCategory.m in Sources */,
 				F679206525CC230B00C7CE9C /* UIImageView+AixCategory.m in Sources */,
 				F679205C25CC230B00C7CE9C /* UILabel+AixCategory.m in Sources */,
+				F6A13B2A25D6218400FDC019 /* PlaylistsViewController.m in Sources */,
 				F6D533A125CB8A3900ABB513 /* GenresWebController.m in Sources */,
 				F679205D25CC230B00C7CE9C /* UIButton+AixCategory.m in Sources */,
 				F679206C25CC230B00C7CE9C /* NSMutableDictionary+AixCategory.m in Sources */,
